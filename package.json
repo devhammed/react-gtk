@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "npx parcel build src/index.js --no-source-maps",
     "dev": "npx parcel watch src/index.js --no-source-maps --no-hmr",
     "start": "gjs dist/index.js",
     "clean": "rm -rf dist"
