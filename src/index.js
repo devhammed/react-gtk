@@ -23,7 +23,10 @@ function MyApp(props) {
         </gtk-box>
       </gtk-window>
       {hasClickedFiveTimes && (
-        <gtk-window defaultHeight={600} defaultWidth={800} title='My App'>
+        <gtk-window
+          defaultHeight={600}
+          defaultWidth={800}
+          title='Royal Highness'>
           <gtk-box orientation={Gtk.Orientation.VERTICAL} spacing={50}>
             <gtk-label label='This is to tell you that you are high!' />
           </gtk-box>
