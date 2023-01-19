@@ -8,10 +8,10 @@ function MyApp(props) {
   return (
     <gtk-window defaultHeight={600} defaultWidth={800} title='My App'>
       <gtk-box orientation={Gtk.Orientation.VERTICAL} spacing={50}>
-        <gtk-label label={`${count}`} />
+        <gtk-label label={count.toString()} />
 
         <gtk-button
-          label='Click Me'
+          label={count == 5 ? 'You are now a developer!' : 'Click Me'}
           onClicked={count == 5 ? null : () => setCount((count) => count + 1)}
         />
       </gtk-box>
