@@ -1,0 +1,20 @@
+{
+  "name": "react-gtk",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "npx parcel watch src/index.js --no-source-maps --no-hmr",
+    "start": "gjs dist/index.js",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [],
+  "author": "Hammed Oyedele",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-reconciler": "^0.29.0"
+  }
+}
