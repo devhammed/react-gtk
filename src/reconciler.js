@@ -8,7 +8,7 @@ let id = -1;
 
 let windows = [];
 
-const isSignal = (key) => key.indexOf('on') == 0;
+const isSignal = (key) => key.indexOf('on') == 0 && key.length > 2;
 
 const setProps = (instance, props) => {
   const signals = [];
