@@ -10,7 +10,9 @@ function MyApp(props) {
       <gtk-box orientation={Gtk.Orientation.VERTICAL} spacing={50}>
         <gtk-label label={`${count}`} />
 
-        <gtk-button onClicked={() => setCount(count + 1)} label='Click Me'>
+        <gtk-button
+          onClicked={count == 5 ? null : () => setCount(count + 1)}
+          label='Click Me'>
           <gtk-label label='Click me MF' />
         </gtk-button>
       </gtk-box>

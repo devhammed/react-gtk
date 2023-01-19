@@ -11,6 +11,8 @@ let windows = [];
 const isSignal = (key) => key.indexOf('on') == 0;
 
 const setProps = (instance, props) => {
+  const signals = [];
+
   for (let prop in props) {
     if (!props.hasOwnProperty(prop)) {
       continue;
@@ -22,35 +24,39 @@ const setProps = (instance, props) => {
 
     const value = props[prop];
 
-    if (!isSignal(prop)) {
-      instance[prop] = value;
+    if (isSignal(prop)) {
+      signals.push({
+        name: prop
+          .slice(2)
+          .split('')
+          .map((letter, idx) => {
+            return letter.toUpperCase() === letter
+              ? `${idx !== 0 ? '-' : ''}${letter.toLowerCase()}`
+              : letter;
+          })
+          .join(''),
+        handler: value,
+      });
       continue;
     }
 
-    const signalName = prop
-      .slice(2)
-      .split('')
-      .map((letter, idx) => {
-        return letter.toUpperCase() === letter
-          ? `${idx !== 0 ? '-' : ''}${letter.toLowerCase()}`
-          : letter;
-      })
-      .join('');
-
-    if (!instance.$signals) {
-      instance.$signals = {};
-    }
-
-    if (typeof value === 'function') {
-      instance.$signals[signalName] = instance.connect(signalName, value);
-      continue;
-    }
-
-    if (typeof instance.$signals[signalName] !== 'undefined') {
-      instance.disconnect(instance.$signals[signalName]);
-      delete instance.$signals[signalName];
-    }
+    instance[prop] = value;
   }
+
+  if (!instance.$signals) {
+    instance.$signals = {};
+  }
+
+  signals.forEach(({ name, handler }) => {
+    if (typeof instance.$signals[name] !== 'undefined') {
+      instance.disconnect(instance.$signals[name]);
+      delete instance.$signals[name];
+    }
+
+    if (typeof handler === 'function') {
+      return (instance.$signals[name] = instance.connect(name, handler));
+    }
+  });
 };
 
 const reconciler = ReactReconciler({
@@ -162,7 +168,11 @@ const reconciler = ReactReconciler({
         finalProps[prop] = null;
       } else if (prop in newProps && !prop in oldProps) {
         finalProps[props] = newProps[prop];
-      } else if (prop in oldProps && oldProps[prop] !== newProps[prop]) {
+      } else if (
+        prop in oldProps &&
+        prop in newProps &&
+        oldProps[prop] !== newProps[prop]
+      ) {
         finalProps[prop] = newProps[prop];
       } else {
         continue;
