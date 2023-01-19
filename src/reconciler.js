@@ -44,6 +44,7 @@ const setProps = (instance, props) => {
     instance[prop] = value;
   }
 
+  // Attach $signals object if needed...
   if (!instance.$signals) {
     instance.$signals = {};
   }
