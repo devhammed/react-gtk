@@ -7,18 +7,29 @@ function MyApp(props) {
   const hasClickedFiveTimes = useMemo(() => count === 5, [count]);
 
   return (
-    <gtk-window defaultHeight={600} defaultWidth={800} title='My App'>
-      <gtk-box orientation={Gtk.Orientation.VERTICAL} spacing={50}>
-        <gtk-label label={count.toString()} />
+    <>
+      <gtk-window defaultHeight={600} defaultWidth={800} title='My App'>
+        <gtk-box orientation={Gtk.Orientation.VERTICAL} spacing={50}>
+          <gtk-label label={count.toString()} />
 
-        <gtk-button
-          label={hasClickedFiveTimes ? 'You are now a developer!' : 'Click Me'}
-          onClicked={
-            hasClickedFiveTimes ? null : () => setCount((count) => count + 1)
-          }
-        />
-      </gtk-box>
-    </gtk-window>
+          <gtk-button
+            label={
+              hasClickedFiveTimes ? 'You are now a developer!' : 'Click Me'
+            }
+            onClicked={
+              hasClickedFiveTimes ? null : () => setCount((count) => count + 1)
+            }
+          />
+        </gtk-box>
+      </gtk-window>
+      {hasClickedFiveTimes && (
+        <gtk-window defaultHeight={600} defaultWidth={800} title='My App'>
+          <gtk-box orientation={Gtk.Orientation.VERTICAL} spacing={50}>
+            <gtk-label label='This is to tell you that you are high!' />
+          </gtk-box>
+        </gtk-window>
+      )}
+    </>
   );
 }
 
