@@ -11,7 +11,7 @@ function MyApp(props) {
         <gtk-label label={`${count}`} />
 
         <gtk-button
-          onClicked={count == 5 ? null : () => setCount(count + 1)}
+          onClicked={count == 5 ? null : () => setCount((count) => count + 1)}
           label='Click Me'>
           <gtk-label label='Click me MF' />
         </gtk-button>
