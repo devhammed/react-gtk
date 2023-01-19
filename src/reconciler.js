@@ -13,6 +13,7 @@ const isSignal = (key) => key.indexOf('on') == 0 && key.length > 2;
 const setProps = (instance, props) => {
   const signals = [];
 
+  // Set properties
   for (let prop in props) {
     if (!props.hasOwnProperty(prop)) {
       continue;
@@ -47,6 +48,7 @@ const setProps = (instance, props) => {
     instance.$signals = {};
   }
 
+  // Then disconnect and connect event handlers...
   signals.forEach(({ name, handler }) => {
     if (typeof instance.$signals[name] !== 'undefined') {
       instance.disconnect(instance.$signals[name]);
@@ -61,6 +63,8 @@ const setProps = (instance, props) => {
 
 const reconciler = ReactReconciler({
   now: Date.now,
+
+  commitUpdate: setProps,
 
   supportsMutation: true,
 
@@ -180,10 +184,6 @@ const reconciler = ReactReconciler({
     }
 
     return Object.keys(finalProps).length > 0 ? finalProps : null;
-  },
-
-  commitUpdate(instance, changes) {
-    setProps(instance, changes);
   },
 
   prepareForCommit() {
