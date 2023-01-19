@@ -83,9 +83,9 @@ const reconciler = ReactReconciler({
         window.$childType = CHILD_TYPE_SINGLE;
 
         window.connect('close-request', () => {
-          rootInstance.remove_window(window);
+          windows = windows.filter((win) => win.id !== windowId);
 
-          if (rootInstance.get_windows().length === 0) {
+          if (windows.filter((win) => win.appId === appId).length === 0) {
             rootInstance.loop.quit();
           }
         });
@@ -304,17 +304,7 @@ export function createRoot({ id, flags = Gio.ApplicationFlags.FLAGS_NONE }) {
 
   return {
     render(element, argv = []) {
-      const loop = new GLib.MainLoop(null, false);
-
-      app.loop = loop;
-
-      app.connect('startup', () => {
-        windows.forEach((item) => {
-          if (item.appId === id) {
-            app.add_window(item.window);
-          }
-        });
-      });
+      app.loop = new GLib.MainLoop(null, false);
 
       app.connect('activate', () => {
         reconciler.updateContainer(element, root, null, function () {
@@ -332,7 +322,7 @@ export function createRoot({ id, flags = Gio.ApplicationFlags.FLAGS_NONE }) {
 
       app.run(argv);
 
-      loop.run();
+      app.loop.run();
     },
   };
 }
