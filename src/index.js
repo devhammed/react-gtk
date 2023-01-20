@@ -3,10 +3,11 @@ import {
   GtkBox,
   GtkButton,
   GtkLabel,
-  GtkOrientation,
   GtkWindow,
 } from './reconciler';
 import { useEffect, useMemo, useRef, useState } from 'react';
+
+const { Gtk } = imports.gi;
 
 function MyApp(props) {
   const secondWinRef = useRef(null);
@@ -16,7 +17,7 @@ function MyApp(props) {
   return (
     <>
       <GtkWindow defaultHeight={600} defaultWidth={800} title='My App'>
-        <GtkBox orientation={GtkOrientation.VERTICAL} spacing={50}>
+        <GtkBox orientation={Gtk.Orientation.VERTICAL} spacing={50}>
           <GtkLabel label={count.toString()} />
           <GtkButton
             label={
@@ -38,7 +39,13 @@ function MyApp(props) {
         defaultHeight={600}
         defaultWidth={800}
         title='Royal Hotness'>
-        <GtkLabel label='I am here to tell you that your head is hot.' />
+        <GtkBox orientation={Gtk.Orientation.VERTICAL} spacing={50}>
+          <GtkLabel label='I am here to tell you that your head is hot.' />
+          <GtkButton
+            onClicked={() => secondWinRef.current?.close()}
+            label='Close Me'
+          />
+        </GtkBox>
       </GtkWindow>
     </>
   );
