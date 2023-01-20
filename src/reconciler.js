@@ -80,13 +80,12 @@ const reconciler = ReactReconciler({
     switch (type) {
       case GtkWindow:
         const window = new Gtk.Window();
+
         const appId = rootInstance.application_id;
 
         window.$type = type;
 
         window.$appId = appId;
-
-        window.$active = false;
 
         window.$present = window.present;
 
@@ -100,12 +99,10 @@ const reconciler = ReactReconciler({
         )}`;
 
         window.connect('close-request', () => {
-          window.hide();
-
-          window.$active = false;
+          window.visible = false;
 
           const activeAppWindows = windows.filter(
-            (win) => win.$appId === appId && win.$active
+            (win) => win.$appId === appId && win.visible
           );
 
           if (activeAppWindows.length === 0) {
@@ -118,7 +115,7 @@ const reconciler = ReactReconciler({
         setProps(window, props);
 
         window.present = () => {
-          window.$active = true;
+          window.visible = true;
           window.$present();
         };
 
