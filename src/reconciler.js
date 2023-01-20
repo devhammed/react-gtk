@@ -8,6 +8,12 @@ let id = -1;
 
 let windows = [];
 
+const CHILD_TYPE_BOX = 'CHILD_TYPE_BOX';
+
+const CHILD_TYPE_NONE = 'CHILD_TYPE_NONE';
+
+const CHILD_TYPE_SINGLE = 'CHILD_TYPE_SINGLE';
+
 const isSignal = (key) => key.indexOf('on') == 0 && key.length > 2;
 
 const setProps = (instance, props) => {
@@ -73,7 +79,7 @@ const reconciler = ReactReconciler({
 
   createInstance(type, props, rootInstance, hostContext, instanceHandle) {
     switch (type) {
-      case 'gtk-window':
+      case GtkWindow:
         const appId = rootInstance.application_id;
         const window = new Gtk.Window();
         const windowId = `${appId}-window-${++id}`;
@@ -99,7 +105,7 @@ const reconciler = ReactReconciler({
         });
 
         return window;
-      case 'gtk-label':
+      case GtkLabel:
         const label = new Gtk.Label();
 
         label.$type = type;
@@ -109,7 +115,7 @@ const reconciler = ReactReconciler({
         setProps(label, props);
 
         return label;
-      case 'gtk-box':
+      case GtkBox:
         const box = new Gtk.Box();
 
         box.$type = type;
@@ -119,7 +125,7 @@ const reconciler = ReactReconciler({
         setProps(box, props);
 
         return box;
-      case 'gtk-button':
+      case GtkButton:
         const button = new Gtk.Button();
 
         button.$type = type;
@@ -289,11 +295,13 @@ const reconciler = ReactReconciler({
   detachDeletedInstance(instance) {},
 });
 
-export const CHILD_TYPE_NONE = 'CHILD_TYPE_NONE';
+export const GtkBox = 'gtk-box';
 
-export const CHILD_TYPE_SINGLE = 'CHILD_TYPE_SINGLE';
+export const GtkLabel = 'gtk-label';
 
-export const CHILD_TYPE_BOX = 'CHILD_TYPE_BOX';
+export const GtkButton = 'gtk-button';
+
+export const GtkWindow = 'gtk-window';
 
 export function createRoot({ id, flags = Gio.ApplicationFlags.FLAGS_NONE }) {
   const app = new Gtk.Application({

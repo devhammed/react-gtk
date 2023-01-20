@@ -1,5 +1,11 @@
 const { Gtk } = imports.gi;
-import { createRoot } from './reconciler';
+import {
+  createRoot,
+  GtkBox,
+  GtkButton,
+  GtkLabel,
+  GtkWindow,
+} from './reconciler';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 function MyApp(props) {
@@ -7,32 +13,17 @@ function MyApp(props) {
   const hasClickedFiveTimes = useMemo(() => count === 5, [count]);
 
   return (
-    <>
-      <gtk-window defaultHeight={600} defaultWidth={800} title='My App'>
-        <gtk-box orientation={Gtk.Orientation.VERTICAL} spacing={50}>
-          <gtk-label label={count.toString()} />
-
-          <gtk-button
-            label={
-              hasClickedFiveTimes ? 'You are now a developer!' : 'Click Me'
-            }
-            onClicked={
-              hasClickedFiveTimes ? null : () => setCount((count) => count + 1)
-            }
-          />
-        </gtk-box>
-      </gtk-window>
-      {hasClickedFiveTimes && (
-        <gtk-window
-          defaultHeight={600}
-          defaultWidth={800}
-          title='Royal Highness'>
-          <gtk-box orientation={Gtk.Orientation.VERTICAL} spacing={50}>
-            <gtk-label label='This is to tell you that you are high!' />
-          </gtk-box>
-        </gtk-window>
-      )}
-    </>
+    <GtkWindow defaultHeight={600} defaultWidth={800} title='My App'>
+      <GtkBox orientation={Gtk.Orientation.VERTICAL} spacing={50}>
+        <GtkLabel label={count.toString()} />
+        <GtkButton
+          label={hasClickedFiveTimes ? 'You are now a developer!' : 'Click Me'}
+          onClicked={
+            hasClickedFiveTimes ? null : () => setCount((count) => count + 1)
+          }
+        />
+      </GtkBox>
+    </GtkWindow>
   );
 }
 
