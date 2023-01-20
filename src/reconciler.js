@@ -316,8 +316,6 @@ export const GtkButton = 'gtk-button';
 
 export const GtkWindow = 'gtk-window';
 
-export const GtkOrientation = Gtk.Orientation;
-
 export function createRoot({ id, flags = Gio.ApplicationFlags.FLAGS_NONE }) {
   const app = new Gtk.Application({
     application_id: id,
