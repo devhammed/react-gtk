@@ -41,10 +41,10 @@ function MyApp(props) {
       </GtkWindow>
 
       <GtkWindow
+        modal
         ref={secondWinRef}
-        defaultHeight={600}
-        defaultWidth={800}
-        title='Royal Hotness'>
+        defaultHeight={500}
+        defaultWidth={500}>
         <GtkBox
           marginStart={25}
           marginEnd={25}
