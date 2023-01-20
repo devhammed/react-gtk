@@ -17,7 +17,13 @@ function MyApp(props) {
   return (
     <>
       <GtkWindow defaultHeight={600} defaultWidth={800} title='My App'>
-        <GtkBox orientation={Gtk.Orientation.VERTICAL} spacing={50}>
+        <GtkBox
+          marginStart={25}
+          marginEnd={25}
+          valign={Gtk.Align.CENTER}
+          halign={Gtk.Align.CENTER}
+          orientation={Gtk.Orientation.VERTICAL}
+          spacing={25}>
           <GtkLabel label={count.toString()} />
           <GtkButton
             label={
@@ -39,7 +45,13 @@ function MyApp(props) {
         defaultHeight={600}
         defaultWidth={800}
         title='Royal Hotness'>
-        <GtkBox orientation={Gtk.Orientation.VERTICAL} spacing={50}>
+        <GtkBox
+          marginStart={25}
+          marginEnd={25}
+          spacing={25}
+          valign={Gtk.Align.CENTER}
+          halign={Gtk.Align.CENTER}
+          orientation={Gtk.Orientation.VERTICAL}>
           <GtkLabel label='I am here to tell you that your head is hot.' />
           <GtkButton
             onClicked={() => secondWinRef.current?.close()}
