@@ -4,9 +4,7 @@ const { Gio, Gtk, GLib } = imports.gi;
 
 const ReactReconciler = require('react-reconciler');
 
-let id = -1;
-
-let windows = [];
+const windows = [];
 
 const CHILD_TYPE_BOX = 'CHILD_TYPE_BOX';
 
@@ -17,9 +15,10 @@ const CHILD_TYPE_SINGLE = 'CHILD_TYPE_SINGLE';
 const isSignal = (key) => key.indexOf('on') == 0 && key.length > 2;
 
 const setProps = (instance, props) => {
+  // The array of signals to attach...
   const signals = [];
 
-  // Set properties
+  // Set properties...
   for (let prop in props) {
     if (!props.hasOwnProperty(prop)) {
       continue;
@@ -80,29 +79,50 @@ const reconciler = ReactReconciler({
   createInstance(type, props, rootInstance, hostContext, instanceHandle) {
     switch (type) {
       case GtkWindow:
-        const appId = rootInstance.application_id;
         const window = new Gtk.Window();
-        const windowId = `${appId}-window-${++id}`;
+        const appId = rootInstance.application_id;
 
         window.$type = type;
 
+        window.$appId = appId;
+
+        window.$active = false;
+
+        window.$present = window.present;
+
         window.$childType = CHILD_TYPE_SINGLE;
 
-        window.connect('close-request', () => {
-          windows = windows.filter((win) => win.id !== windowId);
+        window.$id = `${appId}-win-${'xxxx-xxxx-xxx-xxxx'.replace(
+          /[x]/g,
+          function (c) {
+            return Math.floor(Math.random() * 16).toString(16);
+          }
+        )}`;
 
-          if (windows.filter((win) => win.appId === appId).length === 0) {
+        window.connect('close-request', () => {
+          window.hide();
+
+          window.$active = false;
+
+          const activeAppWindows = windows.filter(
+            (win) => win.$appId === appId && win.$active
+          );
+
+          if (activeAppWindows.length === 0) {
             rootInstance.loop.quit();
           }
+
+          return true;
         });
 
         setProps(window, props);
 
-        windows.push({
-          appId,
-          window,
-          id: windowId,
-        });
+        window.present = () => {
+          window.$active = true;
+          window.$present();
+        };
+
+        windows.push(window);
 
         return window;
       case GtkLabel:
@@ -206,8 +226,6 @@ const reconciler = ReactReconciler({
   },
 
   appendInitialChild(parentInstance, child) {
-    child.show();
-
     if (parentInstance instanceof Gtk.Application) {
       return;
     }
@@ -225,8 +243,6 @@ const reconciler = ReactReconciler({
   },
 
   appendChildToContainer(parentInstance, child) {
-    child.show();
-
     if (parentInstance instanceof Gtk.Application) {
       return;
     }
@@ -303,6 +319,8 @@ export const GtkButton = 'gtk-button';
 
 export const GtkWindow = 'gtk-window';
 
+export const GtkOrientation = Gtk.Orientation;
+
 export function createRoot({ id, flags = Gio.ApplicationFlags.FLAGS_NONE }) {
   const app = new Gtk.Application({
     application_id: id,
@@ -320,8 +338,8 @@ export function createRoot({ id, flags = Gio.ApplicationFlags.FLAGS_NONE }) {
 
           if (!activeWindow) {
             activeWindow = windows.find(
-              (item) => item.appId === app.application_id
-            )?.window;
+              (win) => win.$appId === app.application_id
+            );
           }
 
           activeWindow?.present();

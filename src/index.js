@@ -1,9 +1,9 @@
-const { Gtk } = imports.gi;
 import {
   createRoot,
   GtkBox,
   GtkButton,
   GtkLabel,
+  GtkOrientation,
   GtkWindow,
 } from './reconciler';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -14,7 +14,7 @@ function MyApp(props) {
 
   return (
     <GtkWindow defaultHeight={600} defaultWidth={800} title='My App'>
-      <GtkBox orientation={Gtk.Orientation.VERTICAL} spacing={50}>
+      <GtkBox orientation={GtkOrientation.VERTICAL} spacing={50}>
         <GtkLabel label={count.toString()} />
         <GtkButton
           label={hasClickedFiveTimes ? 'You are now a developer!' : 'Click Me'}
