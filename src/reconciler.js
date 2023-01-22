@@ -69,6 +69,18 @@ const setProps = (instance, props) => {
   });
 };
 
+const createWidget = ({ name, props, type, childType }) => {
+  const widget = new Gtk[name]();
+
+  widget.$type = type;
+
+  widget.$childType = childType;
+
+  setProps(widget, props);
+
+  return widget;
+};
+
 const reconciler = ReactReconciler({
   now: Date.now,
 
@@ -125,46 +137,34 @@ const reconciler = ReactReconciler({
 
         return window;
       case GtkLabel:
-        const label = new Gtk.Label();
-
-        label.$type = type;
-
-        label.$childType = CHILD_TYPE_NONE;
-
-        setProps(label, props);
-
-        return label;
+        return createWidget({
+          type,
+          props,
+          name: 'Label',
+          childType: CHILD_TYPE_NONE,
+        });
       case GtkBox:
       case GtkStackPage:
-        const box = new Gtk.Box();
-
-        box.$type = type;
-
-        box.$childType = CHILD_TYPE_BOX;
-
-        setProps(box, props);
-
-        return box;
+        return createWidget({
+          type,
+          props,
+          name: 'Box',
+          childType: CHILD_TYPE_BOX,
+        });
       case GtkButton:
-        const button = new Gtk.Button();
-
-        button.$type = type;
-
-        button.$childType = CHILD_TYPE_SINGLE;
-
-        setProps(button, props);
-
-        return button;
+        return createWidget({
+          type,
+          props,
+          name: 'Button',
+          childType: CHILD_TYPE_SINGLE,
+        });
       case GtkStack:
-        const stack = new Gtk.Stack();
-
-        stack.$type = type;
-
-        stack.$childType = CHILD_TYPE_STACK;
-
-        setProps(stack, props);
-
-        return stack;
+        return createWidget({
+          type,
+          props,
+          name: 'Stack',
+          childType: CHILD_TYPE_STACK,
+        });
       default:
         throw new Error(`Unknown component type: ${type}`);
     }
