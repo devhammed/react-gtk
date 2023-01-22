@@ -103,8 +103,6 @@ const reconciler = ReactReconciler({
 
         window.$appId = appId;
 
-        window.$present = window.present;
-
         window.$id = `${appId}-window-${'xxxx-xxxx-xxx-xxxx'.replace(
           /[x]/g,
           function (c) {
@@ -125,11 +123,6 @@ const reconciler = ReactReconciler({
 
           return true;
         });
-
-        window.present = () => {
-          window.visible = true;
-          window.$present();
-        };
 
         windows.push(window);
 
