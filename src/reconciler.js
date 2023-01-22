@@ -149,6 +149,20 @@ const reconciler = ReactReconciler({
           name: 'Button',
           childType: CHILD_TYPE_SINGLE,
         });
+      case GtkEntry:
+        return createWidget({
+          type,
+          props,
+          name: 'Entry',
+          childType: CHILD_TYPE_NONE,
+        });
+      case GtkTextView:
+        return createWidget({
+          type,
+          props,
+          name: 'TextView',
+          childType: CHILD_TYPE_NONE,
+        });
       case GtkStack:
         return createWidget({
           type,
@@ -328,6 +342,10 @@ export const GtkBox = 'gtk-box';
 export const GtkLabel = 'gtk-label';
 
 export const GtkButton = 'gtk-button';
+
+export const GtkEntry = 'gtk-entry';
+
+export const GtkTextView = 'gtk-text-view';
 
 export const GtkWindow = 'gtk-window';
 

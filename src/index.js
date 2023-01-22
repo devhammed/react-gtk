@@ -2,9 +2,11 @@ import {
   createRoot,
   GtkBox,
   GtkButton,
+  GtkEntry,
   GtkLabel,
   GtkStack,
   GtkStackPage,
+  GtkTextView,
   GtkWindow,
 } from './reconciler';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -34,6 +36,12 @@ function MyApp(props) {
             halign={Gtk.Align.CENTER}
             orientation={Gtk.Orientation.VERTICAL}>
             <GtkLabel label='Hello World' />
+
+            <GtkEntry
+              onChanged={(entry) => {
+                console.log(entry.buffer.text);
+              }}
+            />
 
             <GtkButton
               onClicked={
