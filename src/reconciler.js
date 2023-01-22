@@ -10,6 +10,8 @@ const CHILD_TYPE_BOX = 'CHILD_TYPE_BOX';
 
 const CHILD_TYPE_NONE = 'CHILD_TYPE_NONE';
 
+const CHILD_TYPE_STACK = 'CHILD_TYPE_STACK';
+
 const CHILD_TYPE_SINGLE = 'CHILD_TYPE_SINGLE';
 
 const isSignal = (key) => key.indexOf('on') == 0 && key.length > 2;
@@ -133,6 +135,7 @@ const reconciler = ReactReconciler({
 
         return label;
       case GtkBox:
+      case GtkStackPage:
         const box = new Gtk.Box();
 
         box.$type = type;
@@ -152,6 +155,16 @@ const reconciler = ReactReconciler({
         setProps(button, props);
 
         return button;
+      case GtkStack:
+        const stack = new Gtk.Stack();
+
+        stack.$type = type;
+
+        stack.$childType = CHILD_TYPE_STACK;
+
+        setProps(stack, props);
+
+        return stack;
       default:
         throw new Error(`Unknown component type: ${type}`);
     }
@@ -234,6 +247,9 @@ const reconciler = ReactReconciler({
       case CHILD_TYPE_SINGLE:
         parentInstance.child = child;
         break;
+      case CHILD_TYPE_STACK:
+        parentInstance.add_child(child);
+        break;
       case CHILD_TYPE_NONE:
         throw new Error(`${parentInstance.$type} should not have children.`);
     }
@@ -250,6 +266,9 @@ const reconciler = ReactReconciler({
         break;
       case CHILD_TYPE_SINGLE:
         parentInstance.child = child;
+        break;
+      case CHILD_TYPE_STACK:
+        parentInstance.add_child(child);
         break;
       case CHILD_TYPE_NONE:
         throw new Error(`${parentInstance.$type} should not have children.`);
@@ -269,6 +288,7 @@ const reconciler = ReactReconciler({
       case CHILD_TYPE_SINGLE:
         parentInstance.child = null;
       case CHILD_TYPE_BOX:
+      case CHILD_TYPE_STACK:
         parentInstance.remove(child);
         break;
       case CHILD_TYPE_NONE:
@@ -285,6 +305,7 @@ const reconciler = ReactReconciler({
       case CHILD_TYPE_SINGLE:
         parentInstance.child = null;
       case CHILD_TYPE_BOX:
+      case CHILD_TYPE_STACK:
         parentInstance.remove(child);
         break;
       case CHILD_TYPE_NONE:
@@ -299,6 +320,9 @@ const reconciler = ReactReconciler({
       case CHILD_TYPE_BOX:
         parentInstance.append(child);
         parentInstance.reorder_child_after(beforeChild, child);
+        break;
+      case CHILD_TYPE_STACK:
+        parentInstance.add_child(child);
         break;
       case CHILD_TYPE_NONE:
         throw new Error(`${parentInstance.$type} should not have children.`);
@@ -315,6 +339,10 @@ export const GtkLabel = 'gtk-label';
 export const GtkButton = 'gtk-button';
 
 export const GtkWindow = 'gtk-window';
+
+export const GtkStack = 'gtk-stack';
+
+export const GtkStackPage = 'gtk-stack-page';
 
 export function createRoot({ id, flags = Gio.ApplicationFlags.FLAGS_NONE }) {
   const app = new Gtk.Application({

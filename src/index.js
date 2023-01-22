@@ -3,6 +3,8 @@ import {
   GtkBox,
   GtkButton,
   GtkLabel,
+  GtkStack,
+  GtkStackPage,
   GtkWindow,
 } from './reconciler';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -10,41 +12,91 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 const { Gtk } = imports.gi;
 
 function MyApp(props) {
+  const stackRef = useRef(null);
+  const firstPageRef = useRef(null);
+  const secondPageRef = useRef(null);
   const secondWinRef = useRef(null);
   const [count, setCount] = useState(0);
-  const hasClickedFiveTimes = useMemo(() => count === 5, [count]);
+  const hasClickedSixTimes = useMemo(() => count === 6, [count]);
 
   return (
     <>
       <GtkWindow defaultHeight={600} defaultWidth={800} title='My App'>
-        <GtkBox
-          marginStart={25}
-          marginEnd={25}
-          valign={Gtk.Align.CENTER}
-          halign={Gtk.Align.CENTER}
-          orientation={Gtk.Orientation.VERTICAL}
-          spacing={25}>
-          <GtkLabel label={count.toString()} />
-          <GtkButton
-            label={
-              hasClickedFiveTimes
-                ? 'You are now a developer, click again!'
-                : 'Click Me'
-            }
-            onClicked={
-              hasClickedFiveTimes
-                ? () => secondWinRef.current?.present()
-                : () => setCount((count) => count + 1)
-            }
-          />
-        </GtkBox>
+        <GtkStack
+          ref={stackRef}
+          transitionType={Gtk.StackTransitionType.SLIDE_RIGHT}>
+          <GtkStackPage
+            ref={firstPageRef}
+            marginStart={25}
+            marginEnd={25}
+            spacing={25}
+            valign={Gtk.Align.CENTER}
+            halign={Gtk.Align.CENTER}
+            orientation={Gtk.Orientation.VERTICAL}>
+            <GtkLabel label='Hello World' />
+
+            <GtkButton
+              onClicked={
+                hasClickedSixTimes
+                  ? () => {
+                      secondWinRef.current?.present();
+                      setCount(0);
+                    }
+                  : () => setCount((prev) => prev + 1)
+              }>
+              <GtkLabel
+                label={
+                  hasClickedSixTimes
+                    ? 'You are now a developer, click again!'
+                    : `You have clicked me ${count} times`
+                }
+              />
+            </GtkButton>
+
+            <GtkButton
+              label='Next page'
+              onClicked={() => {
+                const stack = stackRef.current;
+                const secondPage = secondPageRef.current;
+
+                if (stack && secondPage) {
+                  stack.set_visible_child(secondPage);
+                }
+              }}
+            />
+          </GtkStackPage>
+
+          <GtkStackPage
+            ref={secondPageRef}
+            marginStart={25}
+            marginEnd={25}
+            spacing={25}
+            valign={Gtk.Align.CENTER}
+            halign={Gtk.Align.CENTER}
+            orientation={Gtk.Orientation.VERTICAL}>
+            <GtkLabel label='Hi World' />
+
+            <GtkButton
+              label='Previous page'
+              onClicked={() => {
+                const stack = stackRef.current;
+                const firstPage = firstPageRef.current;
+
+                if (stack && firstPage) {
+                  stack.set_visible_child(firstPage);
+                }
+              }}
+            />
+          </GtkStackPage>
+        </GtkStack>
       </GtkWindow>
 
       <GtkWindow
         modal
         ref={secondWinRef}
         defaultHeight={500}
-        defaultWidth={500}>
+        defaultWidth={500}
+        title='Royal Hotness'>
         <GtkBox
           marginStart={25}
           marginEnd={25}
