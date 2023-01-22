@@ -105,7 +105,7 @@ const reconciler = ReactReconciler({
 
         window.$present = window.present;
 
-        window.$id = `${appId}-win-${'xxxx-xxxx-xxx-xxxx'.replace(
+        window.$id = `${appId}-window-${'xxxx-xxxx-xxx-xxxx'.replace(
           /[x]/g,
           function (c) {
             return Math.floor(Math.random() * 16).toString(16);
