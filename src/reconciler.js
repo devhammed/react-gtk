@@ -93,17 +93,17 @@ const reconciler = ReactReconciler({
   createInstance(type, props, rootInstance, hostContext, instanceHandle) {
     switch (type) {
       case GtkWindow:
-        const window = new Gtk.Window();
-
         const appId = rootInstance.application_id;
-
-        window.$type = type;
+        const window = createWidget({
+          type,
+          props,
+          name: 'Window',
+          childType: CHILD_TYPE_SINGLE,
+        });
 
         window.$appId = appId;
 
         window.$present = window.present;
-
-        window.$childType = CHILD_TYPE_SINGLE;
 
         window.$id = `${appId}-win-${'xxxx-xxxx-xxx-xxxx'.replace(
           /[x]/g,
@@ -125,8 +125,6 @@ const reconciler = ReactReconciler({
 
           return true;
         });
-
-        setProps(window, props);
 
         window.present = () => {
           window.visible = true;
