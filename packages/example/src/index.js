@@ -56,7 +56,7 @@ function MyApp(props) {
                   : () => setCount((prev) => prev + 1)
               }>
               {hasClickedSixTimes
-                ? 'You are now a developer, click again!'
+                ? `You are now a developer, click again!`
                 : `You have clicked me ${count} times`}
             </GtkButton>
 
@@ -112,10 +112,10 @@ function MyApp(props) {
           halign={Gtk.Align.CENTER}
           orientation={Gtk.Orientation.VERTICAL}>
           <GtkLabel label='I am here to tell you that your head is hot.' />
-          <GtkButton
-            onClicked={() => secondWinRef.current?.close()}
-            label='Close Me'
-          />
+
+          <GtkButton onClicked={() => secondWinRef.current?.close()}>
+            Close Me
+          </GtkButton>
         </GtkBox>
       </GtkWindow>
     </>
