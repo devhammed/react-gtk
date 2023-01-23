@@ -271,7 +271,11 @@ const reconciler = ReactReconciler({
     }
   },
 
-  detachDeletedInstance(instance) {},
+  detachDeletedInstance(instance) {
+    if (typeof instance.destroy === 'function') {
+      instance.destroy();
+    }
+  },
 });
 
 /**

@@ -2,6 +2,7 @@
   "name": "react-gtk",
   "private": true,
   "workspaces": [
-    "./packages/*"
+    "./packages/renderer",
+    "./packages/example"
   ]
 }
