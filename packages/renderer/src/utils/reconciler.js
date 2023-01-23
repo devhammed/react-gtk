@@ -15,9 +15,9 @@ import {
   GtkTextView,
   GtkWindow,
 } from '../constants/widgets';
+import { uniqid } from './uniqid';
 import { setProps } from './set-props';
 import { createWidget } from './create-widget';
-import { uniqid } from './uniqid';
 
 const windows = [];
 
