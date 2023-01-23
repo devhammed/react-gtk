@@ -1,5 +1,6 @@
 {
   "name": "@react-gtk/monorepo",
+  "private": true,
   "workspaces": [
     "./packages/*"
   ]
