@@ -272,10 +272,15 @@ const reconciler = ReactReconciler({
   },
 
   detachDeletedInstance(instance) {
-    console.log('deleted instance');
-    if (typeof instance.destroy === 'function') {
-      instance.destroy();
-    }
+    try {
+      if (typeof instance.unparent === 'function') {
+        instance.unparent();
+      }
+
+      if (typeof instance.unrealize === 'function') {
+        instance.unrealize();
+      }
+    } catch (_) {}
   },
 });
 
