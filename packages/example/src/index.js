@@ -1,5 +1,3 @@
-imports.gi.versions.Gtk = '4.0';
-
 import {
   createRoot,
   GtkBox,
@@ -13,7 +11,7 @@ import {
 } from '@react-gtk/renderer';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-const { Gtk } = imports.gi;
+const { Gtk } = ((imports.gi.versions.Gtk = '4.0'), imports.gi);
 
 function MyApp(props) {
   const stackRef = useRef(null);

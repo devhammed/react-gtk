@@ -20,9 +20,7 @@ import { createWidget } from './create-widget';
 
 const windows = [];
 
-imports.gi.versions.Gtk = '4.0';
-
-const { Gio, Gtk, GLib } = imports.gi;
+const { Gio, Gtk, GLib } = ((imports.gi.versions.Gtk = '4.0'), imports.gi);
 
 const reconciler = ReactReconciler({
   now: Date.now,

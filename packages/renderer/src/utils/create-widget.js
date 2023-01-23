@@ -1,8 +1,6 @@
-imports.gi.versions.Gtk = '4.0';
-
 import { setProps } from './set-props';
 
-const { Gio, Gtk, GLib } = imports.gi;
+const { Gio, Gtk, GLib } = ((imports.gi.versions.Gtk = '4.0'), imports.gi);
 
 /**
  * Create a Gtk.Widget from VDOM.
