@@ -29,8 +29,5 @@
   },
   "dependencies": {
     "react-reconciler": "^0.29.0"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0"
   }
 }
