@@ -113,9 +113,19 @@ const reconciler = ReactReconciler({
   },
 
   createTextInstance(text, rootInstance, hostContext, instanceHandle) {
-    throw new Error(
-      'Strings are not supported as children, use GtkLabel instead.'
-    );
+    return createWidget({
+      name: 'Label',
+      type: GtkLabel,
+      childType: CHILD_TYPE_NONE,
+      props: {
+        useMarkup: true,
+        label: text,
+      },
+    });
+  },
+
+  commitTextUpdate(textInstance, oldText, newText) {
+    textInstance.label = newText;
   },
 
   getPublicInstance(instance) {
@@ -123,19 +133,15 @@ const reconciler = ReactReconciler({
   },
 
   getRootHostContext(rootInstance) {
-    return {};
+    return null;
   },
 
   getChildHostContext(parentHostContext, type) {
-    return parentHostContext;
+    return null;
   },
 
   shouldSetTextContent() {
     return false;
-  },
-
-  commitTextUpdate(textInstance, oldText, newText) {
-    throw new Error('commitTextUpdate should not be called');
   },
 
   prepareUpdate(instance, type, oldProps, newProps, rootInstance) {

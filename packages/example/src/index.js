@@ -37,9 +37,8 @@ function MyApp(props) {
             orientation={Gtk.Orientation.VERTICAL}>
             <GtkLabel label='Hello World' />
 
-            {hasClickedSixTimes && (
-              <GtkLabel label={'Hi World, testing insertBefore!'} />
-            )}
+            {hasClickedSixTimes &&
+              '<i>Hi World, testing insertBefore and text instance!</i>'}
 
             <GtkEntry
               onChanged={(entry) => {
@@ -56,13 +55,9 @@ function MyApp(props) {
                     }
                   : () => setCount((prev) => prev + 1)
               }>
-              <GtkLabel
-                label={
-                  hasClickedSixTimes
-                    ? 'You are now a developer, click again!'
-                    : `You have clicked me ${count} times`
-                }
-              />
+              {hasClickedSixTimes
+                ? 'You are now a developer, click again!'
+                : `You have clicked me ${count} times`}
             </GtkButton>
 
             <GtkButton
