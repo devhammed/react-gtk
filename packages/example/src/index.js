@@ -37,6 +37,10 @@ function MyApp(props) {
             orientation={Gtk.Orientation.VERTICAL}>
             <GtkLabel label='Hello World' />
 
+            {hasClickedSixTimes && (
+              <GtkLabel label={'Hi World, testing insertBefore!'} />
+            )}
+
             <GtkEntry
               onChanged={(entry) => {
                 console.log(entry.buffer.text);

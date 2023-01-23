@@ -260,7 +260,7 @@ const reconciler = ReactReconciler({
       case CHILD_TYPE_SINGLE:
         parentInstance.child = child;
       case CHILD_TYPE_BOX:
-        parentInstance.append(child);
+        parentInstance.insert_child_after(child, beforeChild);
         parentInstance.reorder_child_after(beforeChild, child);
         break;
       case CHILD_TYPE_STACK:
@@ -272,6 +272,7 @@ const reconciler = ReactReconciler({
   },
 
   detachDeletedInstance(instance) {
+    console.log('deleted instance');
     if (typeof instance.destroy === 'function') {
       instance.destroy();
     }
