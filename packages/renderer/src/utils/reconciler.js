@@ -17,6 +17,7 @@ import {
 } from '../constants/widgets';
 import { setProps } from './set-props';
 import { createWidget } from './create-widget';
+import { uniqid } from './uniqid';
 
 const windows = [];
 
@@ -44,12 +45,7 @@ const reconciler = ReactReconciler({
 
         window.$appId = appId;
 
-        window.$id = `${appId}-window-${'xxxx-xxxx-xxx-xxxx'.replace(
-          /[x]/g,
-          function (c) {
-            return Math.floor(Math.random() * 16).toString(16);
-          }
-        )}`;
+        window.$id = `${appId}-window-${uniqid()}`;
 
         window.connect('close-request', () => {
           window.visible = false;
