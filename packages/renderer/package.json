@@ -1,11 +1,19 @@
 {
-  "name": "@react-gtk/renderer",
+  "name": "react-gtk-renderer",
   "version": "1.0.0",
   "description": "React GTK+ Renderer",
   "main": "dist/index.js",
+  "files": [
+    "dist",
+    "types.d.ts",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
+    "prepublishOnly": "npm run clean && npm run build",
     "build": "npx parcel build src/index.js --no-source-maps",
-    "dev": "npx parcel watch src/index.js --no-source-maps --no-hmr"
+    "dev": "npx parcel watch src/index.js --no-source-maps --no-hmr",
+    "clean": "rm -rf dist"
   },
   "repository": {
     "type": "git",

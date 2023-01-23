@@ -1,6 +1,7 @@
 {
-  "name": "@react-gtk/example",
+  "name": "react-gtk-example",
   "version": "1.0.0",
+  "private": true,
   "description": "React GTK+ Example",
   "scripts": {
     "build": "npx parcel build src/index.js --no-source-maps",

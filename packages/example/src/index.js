@@ -8,7 +8,7 @@ import {
   GtkStackPage,
   GtkTextView,
   GtkWindow,
-} from '@react-gtk/renderer';
+} from 'react-gtk-renderer';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 const { Gtk } = ((imports.gi.versions.Gtk = '4.0'), imports.gi);
