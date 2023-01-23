@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "description": "React GTK+ Example",
+  "source": "src/index.js",
   "scripts": {
-    "build": "npx parcel build src/index.js --no-source-maps",
-    "dev": "npx parcel watch src/index.js --no-source-maps --no-hmr",
-    "start": "gjs dist/index.js",
+    "build": "parcel build --no-source-maps",
+    "start": "parcel watch --no-source-maps --no-hmr",
+    "app": "gjs dist/index.js",
     "clean": "rm -rf dist"
   },
   "repository": {
