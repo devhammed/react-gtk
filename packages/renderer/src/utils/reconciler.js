@@ -281,7 +281,7 @@ const reconciler = ReactReconciler({
  * @param {string} appProps.id
  * @param {number} appProps.flags
  */
-export function createRoot({ id, flags = Gio.ApplicationFlags.FLAGS_NONE }) {
+export const createRoot = ({ id, flags = Gio.ApplicationFlags.FLAGS_NONE }) => {
   const app = new Gtk.Application({
     application_id: id,
     flags,
@@ -317,4 +317,4 @@ export function createRoot({ id, flags = Gio.ApplicationFlags.FLAGS_NONE }) {
       app.loop.run();
     },
   };
-}
+};
