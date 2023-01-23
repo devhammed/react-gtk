@@ -118,6 +118,7 @@ const reconciler = ReactReconciler({
       type: GtkLabel,
       childType: CHILD_TYPE_NONE,
       props: {
+        /** @see {https://docs.gtk.org/Pango/pango_markup.html} */
         useMarkup: true,
         label: text,
       },
