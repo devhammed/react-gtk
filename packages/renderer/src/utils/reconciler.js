@@ -1,85 +1,28 @@
-imports.gi.versions.Gtk = '4.0';
-
-const { Gio, Gtk, GLib } = imports.gi;
-
-const ReactReconciler = require('react-reconciler');
+import ReactReconciler from 'react-reconciler';
+import {
+  CHILD_TYPE_BOX,
+  CHILD_TYPE_NONE,
+  CHILD_TYPE_SINGLE,
+  CHILD_TYPE_STACK,
+} from '../constants/child-types';
+import {
+  GtkBox,
+  GtkButton,
+  GtkEntry,
+  GtkLabel,
+  GtkStack,
+  GtkStackPage,
+  GtkTextView,
+  GtkWindow,
+} from '../constants/widgets';
+import { setProps } from './set-props';
+import { createWidget } from './create-widget';
 
 const windows = [];
 
-const CHILD_TYPE_BOX = 'CHILD_TYPE_BOX';
+imports.gi.versions.Gtk = '4.0';
 
-const CHILD_TYPE_NONE = 'CHILD_TYPE_NONE';
-
-const CHILD_TYPE_STACK = 'CHILD_TYPE_STACK';
-
-const CHILD_TYPE_SINGLE = 'CHILD_TYPE_SINGLE';
-
-const isSignal = (key) => key.indexOf('on') == 0 && key.length > 2;
-
-const setProps = (instance, props) => {
-  // The array of signals to attach...
-  const signals = [];
-
-  // Set properties...
-  for (let prop in props) {
-    if (!props.hasOwnProperty(prop)) {
-      continue;
-    }
-
-    if (prop === 'children') {
-      continue;
-    }
-
-    const value = props[prop];
-
-    if (isSignal(prop)) {
-      signals.push({
-        name: prop
-          .slice(2)
-          .split('')
-          .map((letter, idx) => {
-            return letter.toUpperCase() === letter
-              ? `${idx !== 0 ? '-' : ''}${letter.toLowerCase()}`
-              : letter;
-          })
-          .join(''),
-        handler: value,
-      });
-      continue;
-    }
-
-    instance[prop] = value;
-  }
-
-  // Attach $signals object if needed...
-  if (!instance.$signals) {
-    instance.$signals = {};
-  }
-
-  // Then disconnect and connect event handlers...
-  signals.forEach(({ name, handler }) => {
-    if (typeof instance.$signals[name] !== 'undefined') {
-      instance.disconnect(instance.$signals[name]);
-      delete instance.$signals[name];
-    }
-
-    if (typeof handler === 'function') {
-      return (instance.$signals[name] = instance.connect(name, handler));
-    }
-  });
-};
-
-const createWidget = ({ name, props, type, childType }) => {
-  const widget = new Gtk[name]();
-
-  widget.$type = type;
-
-  widget.$childType = childType;
-
-  setProps(widget, props);
-
-  return widget;
-};
+const { Gio, Gtk, GLib } = imports.gi;
 
 const reconciler = ReactReconciler({
   now: Date.now,
@@ -337,22 +280,13 @@ const reconciler = ReactReconciler({
   detachDeletedInstance(instance) {},
 });
 
-export const GtkBox = 'gtk-box';
-
-export const GtkLabel = 'gtk-label';
-
-export const GtkButton = 'gtk-button';
-
-export const GtkEntry = 'gtk-entry';
-
-export const GtkTextView = 'gtk-text-view';
-
-export const GtkWindow = 'gtk-window';
-
-export const GtkStack = 'gtk-stack';
-
-export const GtkStackPage = 'gtk-stack-page';
-
+/**
+ * Create a React Gtk Renderer Root App.
+ *
+ * @param {Object} appProps
+ * @param {string} appProps.id
+ * @param {number} appProps.flags
+ */
 export function createRoot({ id, flags = Gio.ApplicationFlags.FLAGS_NONE }) {
   const app = new Gtk.Application({
     application_id: id,
@@ -361,6 +295,12 @@ export function createRoot({ id, flags = Gio.ApplicationFlags.FLAGS_NONE }) {
   const root = reconciler.createContainer(app, false, false);
 
   return {
+    /**
+     * Render an element onto the app.
+     *
+     * @param {JSX.Element} element
+     * @param {string[]} argv
+     */
     render(element, argv = []) {
       app.loop = new GLib.MainLoop(null, false);
 

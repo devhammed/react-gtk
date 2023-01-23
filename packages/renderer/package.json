@@ -1,0 +1,29 @@
+{
+  "name": "@react-gtk/renderer",
+  "version": "1.0.0",
+  "description": "React GTK+ Renderer",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx parcel build src/index.js --no-source-maps",
+    "dev": "npx parcel watch src/index.js --no-source-maps --no-hmr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devhammed/react-gtk.git"
+  },
+  "author": "Hammed Oyedele",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devhammed/react-gtk/issues"
+  },
+  "homepage": "https://github.com/devhammed/react-gtk#readme",
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  },
+  "dependencies": {
+    "react-reconciler": "^0.29.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
+}

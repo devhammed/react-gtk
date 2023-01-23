@@ -1,3 +1,5 @@
+imports.gi.versions.Gtk = '4.0';
+
 import {
   createRoot,
   GtkBox,
@@ -8,7 +10,7 @@ import {
   GtkStackPage,
   GtkTextView,
   GtkWindow,
-} from './reconciler';
+} from '@react-gtk/renderer';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 const { Gtk } = imports.gi;
