@@ -1,6 +1,6 @@
 {
   "name": "react-gtk-renderer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React GTK+ Renderer",
   "main": "dist/index.js",
   "files": [
