@@ -1,4 +1,5 @@
 // Interfaces
+export type { GtkWidgetProps } from './widgets/gtk-widget';
 export type { GtkBoxProps } from './widgets/gtk-box';
 export type { GtkWindowProps } from './widgets/gtk-window';
 export type { GtkLabelProps } from './widgets/gtk-label';
@@ -6,8 +7,10 @@ export type { GtkButtonProps } from './widgets/gtk-button';
 export type { GtkEntryProps } from './widgets/gtk-entry';
 export type { GtkStackProps } from './widgets/gtk-stack';
 export type { GtkStackPageProps } from './widgets/gtk-stack-page';
+export type { RootInstance, RootProps } from './utils/reconciler';
 
 // Widgets & Implementations
+export { GtkWidget, GtkWidgetImpl } from './widgets/gtk-widget';
 export { GtkBox, GtkBoxImpl } from './widgets/gtk-box';
 export { GtkWindow, GtkWindowImpl } from './widgets/gtk-window';
 export { GtkLabel, GtkLabelImpl } from './widgets/gtk-label';

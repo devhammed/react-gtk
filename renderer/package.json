@@ -15,7 +15,9 @@
     "prepublishOnly": "npm run clean && npm run build",
     "build": "parcel build --no-source-maps",
     "start": "parcel watch --no-source-maps --no-hmr",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "generate-docs": "typedoc src/index.ts",
+    "serve-docs": "serve docs"
   },
   "repository": {
     "type": "git",
@@ -28,11 +30,13 @@
   },
   "homepage": "https://github.com/devhammed/react-gtk#readme",
   "devDependencies": {
-    "parcel": "^2.8.3",
-    "typescript": "^4.9.4",
-    "@types/react-reconciler": "^0.28.2",
     "@parcel/packager-ts": "^2.8.3",
-    "@parcel/transformer-typescript-types": "^2.8.3"
+    "@parcel/transformer-typescript-types": "^2.8.3",
+    "@types/react-reconciler": "^0.28.2",
+    "parcel": "^2.8.3",
+    "serve": "^14.2.0",
+    "typedoc": "^0.23.24",
+    "typescript": "^4.9.4"
   },
   "peerDependencies": {
     "react": "^18.0.0"
