@@ -4,6 +4,9 @@ import { createReactComponent } from '../utils/create-react-component';
 
 export const GTK_WINDOW_TAG = 'gtk-window';
 
+/**
+ * @group Props
+ */
 export interface GtkWindowProps extends GtkWidgetProps {
   /**
    * The default height of the window.
@@ -31,10 +34,16 @@ export interface GtkWindowProps extends GtkWidgetProps {
   children?: ReactElement | string;
 }
 
+/**
+ * @group Components
+ */
 export const GtkWindow = createReactComponent<GtkWindowImpl, GtkWindowProps>(
   GTK_WINDOW_TAG
 );
 
+/**
+ * @group Native Widgets
+ */
 export class GtkWindowImpl extends GtkWidgetImpl {
   constructor(props: GtkWindowProps, rootInstance: any) {
     super(props, rootInstance);

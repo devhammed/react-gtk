@@ -9,6 +9,9 @@ const { Gtk } = ((imports.gi.versions.Gtk = '4.0'), imports.gi);
 
 export const GTK_WIDGET_TAG = 'gtk-widget';
 
+/**
+ * @group Props
+ */
 export interface GtkWidgetProps {
   visible?: boolean;
   halign?: GtkAlign;
@@ -16,10 +19,16 @@ export interface GtkWidgetProps {
   name?: string;
 }
 
+/**
+ * @group Components
+ */
 export const GtkWidget = createReactComponent<GtkWidgetImpl, GtkWidgetProps>(
   GTK_WIDGET_TAG
 );
 
+/**
+ * @group Native Widgets
+ */
 export abstract class GtkWidgetImpl {
   public nativeInstance: any;
 

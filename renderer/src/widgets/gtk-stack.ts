@@ -5,15 +5,24 @@ import { GtkStackTransitionType } from '../enums/gtk-stack-transition-type';
 
 export const GTK_STACK_TAG = 'gtk-stack';
 
+/**
+ * @group Props
+ */
 export interface GtkStackProps extends GtkWidgetProps {
   transitionType?: GtkStackTransitionType;
   children?: ReactNode;
 }
 
+/**
+ * @group Components
+ */
 export const GtkStack = createReactComponent<GtkStackImpl, GtkStackProps>(
   GTK_STACK_TAG
 );
 
+/**
+ * @group Native Widgets
+ */
 export class GtkStackImpl extends GtkWidgetImpl {
   constructor(props: GtkStackProps, rootInstance: any) {
     super(props, rootInstance);

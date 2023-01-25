@@ -3,14 +3,23 @@ import { createReactComponent } from '../utils/create-react-component';
 
 export const GTK_ENTRY_TAG = 'gtk-entry';
 
+/**
+ * @group Props
+ */
 export interface GtkEntryProps extends GtkWidgetProps {
   onChanged?: (entry: GtkEntryImpl) => void;
 }
 
+/**
+ * @group Components
+ */
 export const GtkEntry = createReactComponent<GtkEntryImpl, GtkEntryProps>(
   GTK_ENTRY_TAG
 );
 
+/**
+ * @group Native Widgets
+ */
 export class GtkEntryImpl extends GtkWidgetImpl {
   constructor(props: GtkEntryProps, rootInstance: any) {
     super(props, rootInstance);
