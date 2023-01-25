@@ -35,7 +35,7 @@ export abstract class GtkWidgetImpl {
   constructor(props: GtkWidgetProps, rootInstance: any) {
     this.nativeInstance = new Gtk[this.nativeName]();
     this.nativeInstance.$root = rootInstance;
-    this.nativeInstance.$component = this;
+    this.nativeInstance.$impl = this;
     this.updateProps(props);
   }
 
@@ -99,8 +99,7 @@ export abstract class GtkWidgetImpl {
       if (typeof handler === 'function') {
         this.nativeInstance.$signals[name] = this.nativeInstance.connect(
           name,
-          (self: any, ...args: any[]) =>
-            handler(self?.$component ?? self, ...args)
+          (self: any, ...args: any[]) => handler(self?.$impl ?? self, ...args)
         );
       }
     });
