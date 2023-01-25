@@ -2,4 +2,4 @@
 
 React GTK.
 
-View more information in the README of the [renderer package](./packages/renderer/README.md).
+View more information in the [renderer package](./renderer/README.md).

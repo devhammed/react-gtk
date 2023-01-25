@@ -1,8 +1,8 @@
 {
-  "name": "react-gtk-example",
+  "name": "react-gtk-js-example",
   "version": "1.0.0",
   "private": true,
-  "description": "React GTK+ Example",
+  "description": "React GTK+ JavaScript Example",
   "source": "src/index.js",
   "scripts": {
     "build": "parcel build --no-source-maps",
