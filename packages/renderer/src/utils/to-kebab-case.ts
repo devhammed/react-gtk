@@ -2,11 +2,8 @@
  * Transforms a string into kebab-case.
  *
  * e.g "camelCase" will be returned as "camel-case".
- *
- * @param {string} str
- * @returns {string}
  */
-export const toKebabCase = (str) => {
+export const toKebabCase = (str: string): string => {
   return str
     .slice(2)
     .split('')

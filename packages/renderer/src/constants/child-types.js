@@ -1,7 +1,0 @@
-export const CHILD_TYPE_BOX = 'CHILD_TYPE_BOX';
-
-export const CHILD_TYPE_NONE = 'CHILD_TYPE_NONE';
-
-export const CHILD_TYPE_STACK = 'CHILD_TYPE_STACK';
-
-export const CHILD_TYPE_SINGLE = 'CHILD_TYPE_SINGLE';

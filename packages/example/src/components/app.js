@@ -1,16 +1,15 @@
 import {
+  GtkAlign,
   GtkBox,
   GtkButton,
   GtkEntry,
   GtkLabel,
+  GtkOrientation,
   GtkStack,
   GtkStackPage,
-  GtkTextView,
   GtkWindow,
 } from 'react-gtk-renderer';
 import { useEffect, useMemo, useRef, useState } from 'react';
-
-const { Gtk } = imports.gi;
 
 export function MyApp(props) {
   const stackRef = useRef(null);
@@ -23,17 +22,15 @@ export function MyApp(props) {
   return (
     <>
       <GtkWindow defaultHeight={600} defaultWidth={800} title='My App'>
-        <GtkStack
-          ref={stackRef}
-          transitionType={Gtk.StackTransitionType.SLIDE_RIGHT}>
+        <GtkStack ref={stackRef}>
           <GtkStackPage
             ref={firstPageRef}
             marginStart={25}
             marginEnd={25}
             spacing={25}
-            valign={Gtk.Align.CENTER}
-            halign={Gtk.Align.CENTER}
-            orientation={Gtk.Orientation.VERTICAL}>
+            valign={GtkAlign.CENTER}
+            halign={GtkAlign.CENTER}
+            orientation={GtkOrientation.VERTICAL}>
             <GtkLabel label='Hello World' />
 
             {hasClickedSixTimes &&
@@ -41,7 +38,7 @@ export function MyApp(props) {
 
             <GtkEntry
               onChanged={(entry) => {
-                console.log(entry.buffer.text);
+                console.log(entry.text);
               }}
             />
 
@@ -77,9 +74,9 @@ export function MyApp(props) {
             marginStart={25}
             marginEnd={25}
             spacing={25}
-            valign={Gtk.Align.CENTER}
-            halign={Gtk.Align.CENTER}
-            orientation={Gtk.Orientation.VERTICAL}>
+            valign={GtkAlign.CENTER}
+            halign={GtkAlign.CENTER}
+            orientation={GtkOrientation.VERTICAL}>
             <GtkLabel label='Hi World' />
 
             <GtkButton
@@ -107,9 +104,9 @@ export function MyApp(props) {
           marginStart={25}
           marginEnd={25}
           spacing={25}
-          valign={Gtk.Align.CENTER}
-          halign={Gtk.Align.CENTER}
-          orientation={Gtk.Orientation.VERTICAL}>
+          valign={GtkAlign.CENTER}
+          halign={GtkAlign.CENTER}
+          orientation={GtkOrientation.VERTICAL}>
           <GtkLabel label='I am here to tell you that your head is hot.' />
 
           <GtkButton onClicked={() => secondWinRef.current?.close()}>

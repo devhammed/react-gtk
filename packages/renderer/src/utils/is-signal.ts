@@ -1,9 +1,6 @@
 /**
  * Check if [key] is a signal prop.
- *
- * @param {string} key
- * @returns {boolean}
  */
-export const isSignal = (key) => {
+export const isSignal = (key: string): boolean => {
   return key.indexOf('on') == 0 && key.length > 2;
 };
