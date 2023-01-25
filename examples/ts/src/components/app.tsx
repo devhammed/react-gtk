@@ -6,17 +6,20 @@ import {
   GtkLabel,
   GtkOrientation,
   GtkStack,
+  GtkStackImpl,
   GtkStackPage,
+  GtkStackPageImpl,
   GtkStackTransitionType,
   GtkWindow,
+  GtkWindowImpl,
 } from 'react-gtk-renderer';
 import { useMemo, useRef, useState } from 'react';
 
 export function MyApp() {
-  const stackRef = useRef(null);
-  const firstPageRef = useRef(null);
-  const secondPageRef = useRef(null);
-  const secondWinRef = useRef(null);
+  const stackRef = useRef<GtkStackImpl>();
+  const firstPageRef = useRef<GtkStackPageImpl>();
+  const secondPageRef = useRef<GtkStackPageImpl>();
+  const secondWinRef = useRef<GtkWindowImpl>();
   const [count, setCount] = useState(0);
   const hasClickedSixTimes = useMemo(() => count === 6, [count]);
 

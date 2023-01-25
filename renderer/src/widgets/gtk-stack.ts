@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { GtkStackPageImpl } from './gtk-stack-page';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
 import { createReactComponent } from '../utils/create-react-component';
 import { GtkStackTransitionType } from '../enums/gtk-stack-transition-type';
@@ -40,7 +41,7 @@ export class GtkStackImpl extends GtkWidgetImpl {
     this.nativeInstance.remove(child.nativeInstance);
   }
 
-  setVisibleChild(child: GtkWidgetImpl) {
+  setVisibleChild(child: GtkStackPageImpl) {
     this.nativeInstance.set_visible_child(child.nativeInstance);
   }
 }

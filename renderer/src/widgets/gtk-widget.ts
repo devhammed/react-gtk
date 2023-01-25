@@ -35,7 +35,7 @@ export abstract class GtkWidgetImpl {
   constructor(props: GtkWidgetProps, rootInstance: any) {
     this.nativeInstance = new Gtk[this.nativeName]();
     this.nativeInstance.$root = rootInstance;
-    this.nativeInstance.nativeName = this.nativeName;
+    this.nativeInstance.$component = this;
     this.updateProps(props);
   }
 
@@ -59,35 +59,12 @@ export abstract class GtkWidgetImpl {
     this.nativeInstance[key] = value;
   }
 
-  appendChild(_child: GtkWidgetImpl) {
-    throw new Error(`Cannot add children to a ${this.nativeName}.`);
-  }
-
-  insertBefore(_child: GtkWidgetImpl, _beforeChild: GtkWidgetImpl) {
-    throw new Error(
-      `Cannot insert child before another to a ${this.nativeName}.`
-    );
-  }
-
-  removeChild(_child: GtkWidgetImpl) {
-    throw new Error(`Cannot remove children from a ${this.nativeName}.`);
-  }
-
-  detach() {
-    try {
-      if (typeof this.nativeInstance.unparent === 'function') {
-        this.nativeInstance.unparent();
-      }
-
-      if (typeof this.nativeInstance.unrealize === 'function') {
-        this.nativeInstance.unrealize();
-      }
-    } catch (_) {}
-  }
-
   updateProps(props: GtkWidgetProps) {
     // The array of signals to attach...
-    const signals: { name: string; handler: () => void | null }[] = [];
+    const signals: {
+      name: string;
+      handler: (self: any, ...args: any[]) => void | null;
+    }[] = [];
 
     // Set properties...
     for (let prop in props) {
@@ -122,9 +99,36 @@ export abstract class GtkWidgetImpl {
       if (typeof handler === 'function') {
         this.nativeInstance.$signals[name] = this.nativeInstance.connect(
           name,
-          handler
+          (self: any, ...args: any[]) =>
+            handler(self?.$component ?? self, ...args)
         );
       }
     });
+  }
+
+  appendChild(_child: GtkWidgetImpl) {
+    throw new Error(`Cannot add children to a ${this.nativeName}.`);
+  }
+
+  insertBefore(_child: GtkWidgetImpl, _beforeChild: GtkWidgetImpl) {
+    throw new Error(
+      `Cannot insert child before another to a ${this.nativeName}.`
+    );
+  }
+
+  removeChild(_child: GtkWidgetImpl) {
+    throw new Error(`Cannot remove children from a ${this.nativeName}.`);
+  }
+
+  detach() {
+    try {
+      if (typeof this.nativeInstance.unparent === 'function') {
+        this.nativeInstance.unparent();
+      }
+
+      if (typeof this.nativeInstance.unrealize === 'function') {
+        this.nativeInstance.unrealize();
+      }
+    } catch (_) {}
   }
 }
