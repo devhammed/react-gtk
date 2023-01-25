@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactElement } from 'react';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
 import { createReactComponent } from '../utils/create-react-component';
 
@@ -6,7 +6,7 @@ export const GTK_BUTTON_TAG = 'gtk-button';
 
 export interface GtkButtonProps extends GtkWidgetProps {
   label?: string;
-  children?: ReactNode;
+  children?: ReactElement | string;
   onClicked?: (btn: GtkButtonImpl) => void;
 }
 
@@ -25,5 +25,9 @@ export class GtkButtonImpl extends GtkWidgetImpl {
 
   appendChild(child: GtkWidgetImpl): void {
     this.nativeInstance.child = child.nativeInstance;
+  }
+
+  removeChild(_child: GtkWidgetImpl): void {
+    this.nativeInstance.child = null;
   }
 }
