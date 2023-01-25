@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=React GTK
+Name=@EXEC_NAME@
 Comment=Testings
 Categories=Utility;Education;
 Exec=@PACKAGE_NAME@

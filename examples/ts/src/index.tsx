@@ -11,7 +11,7 @@ imports.package.init({
 });
 
 imports.package.run({
-  main: function (argv) {
+  main: function (argv: string[]) {
     const root = createRoot({
       id: '@PACKAGE_NAME@',
     });

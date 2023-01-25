@@ -1,14 +1,13 @@
 project(
     'com.github.devhammed.reactGTKJS',
-    'c',
     version: '1.0.0'
 )
 
 gnome = import('gnome')
 
-exec_name = 'React GTK JavaScript'
-
 app_id = meson.project_name()
+
+exec_name = 'React GTK JavaScript'
 
 pkgdatadir = join_paths(get_option('datadir'), app_id)
 
@@ -24,12 +23,21 @@ source_conf.set('PACKAGE_NAME', app_id)
 source_conf.set('PACKAGE_VERSION', meson.project_version())
 source_conf.set('PREFIX', get_option('prefix'))
 source_conf.set('LIBDIR', libdir)
+source_conf.set('EXEC_NAME', exec_name)
 source_conf.set('EXEC', join_paths(exec_dir, exec_name))
 source_conf.set('PKGDATADIR', pkgdatadir)
 
+custom_target(
+    'app',
+    console: true,
+    install: false,
+    output: 'app',
+    command: [find_program('npm').path(), 'run', 'build'],
+)
+
 install_data(
     configure_file(
-        input: join_paths('data', app_id, '.in'),
+        input: join_paths('data', app_id + '.in'),
         output: app_id,
         configuration: source_conf,
     ),
@@ -48,7 +56,7 @@ install_data(
 
 install_data(
     configure_file(
-        input: join_paths('data', app_id, '.desktop.in'),
+        input: join_paths('data', app_id + '.desktop.in'),
         output: app_id + '.desktop',
         configuration: source_conf,
     ),
@@ -57,7 +65,7 @@ install_data(
 
 install_data(
     configure_file(
-        input: join_paths('data', app_id, '.appdata.xml.in'),
+        input: join_paths('data', app_id + '.appdata.xml.in'),
         output: app_id + '.appdata.xml',
         configuration: source_conf,
     ),
