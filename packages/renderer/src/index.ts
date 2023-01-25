@@ -19,6 +19,7 @@ export { GtkStackPage, GtkStackPageImpl } from './widgets/gtk-stack-page';
 // Enumerations
 export { GtkAlign } from './enums/gtk-align';
 export { GtkOrientation } from './enums/gtk-orientation';
+export { GtkStackTransitionType } from './enums/gtk-stack-transition-type';
 
 // Renderer
 export { createRoot } from './utils/reconciler';

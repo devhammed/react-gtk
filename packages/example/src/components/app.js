@@ -7,6 +7,7 @@ import {
   GtkOrientation,
   GtkStack,
   GtkStackPage,
+  GtkStackTransitionType,
   GtkWindow,
 } from 'react-gtk-renderer';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -22,7 +23,9 @@ export function MyApp(props) {
   return (
     <>
       <GtkWindow defaultHeight={600} defaultWidth={800} title='My App'>
-        <GtkStack ref={stackRef}>
+        <GtkStack
+          ref={stackRef}
+          transitionType={GtkStackTransitionType.SLIDE_RIGHT}>
           <GtkStackPage
             ref={firstPageRef}
             marginStart={25}
@@ -62,7 +65,7 @@ export function MyApp(props) {
                 const secondPage = secondPageRef.current;
 
                 if (stack && secondPage) {
-                  stack.set_visible_child(secondPage);
+                  stack.setVisibleChild(secondPage);
                 }
               }}>
               Next page
@@ -86,7 +89,7 @@ export function MyApp(props) {
                 const firstPage = firstPageRef.current;
 
                 if (stack && firstPage) {
-                  stack.set_visible_child(firstPage);
+                  stack.setVisibleChild(firstPage);
                 }
               }}
             />
