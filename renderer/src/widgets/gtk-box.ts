@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { GtkOrientation } from '../enums/gtk-orientation';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
 import { createReactComponent } from '../utils/create-react-component';
@@ -7,6 +8,9 @@ export const GTK_BOX_TAG = 'gtk-box';
 export interface GtkBoxProps extends GtkWidgetProps {
   orientation?: GtkOrientation;
   spacing?: number;
+  marginStart?: number;
+  marginEnd?: number;
+  children?: ReactNode;
 }
 
 export const GtkBox = createReactComponent<GtkBoxImpl, GtkBoxProps>(

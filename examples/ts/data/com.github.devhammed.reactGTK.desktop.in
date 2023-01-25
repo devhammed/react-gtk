@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=React GTK
+Comment=Testings
+Categories=Utility;Education;
+Exec=@PACKAGE_NAME@
+Icon=application-default-icon
+Terminal=false
+Type=Application
+Keywords=Hello;World;Example;
+StartupWMClass=@PACKAGE_NAME@

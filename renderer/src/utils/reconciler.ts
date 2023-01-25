@@ -2,6 +2,7 @@ import * as ReactReconciler from 'react-reconciler';
 import { GtkBoxImpl, GTK_BOX_TAG } from '../widgets/gtk-box';
 import { GtkEntryImpl, GTK_ENTRY_TAG } from '../widgets/gtk-entry';
 import { GtkLabelImpl, GTK_LABEL_TAG } from '../widgets/gtk-label';
+import { GtkStackImpl, GTK_STACK_TAG } from '../widgets/gtk-stack';
 import { GtkButtonImpl, GTK_BUTTON_TAG } from '../widgets/gtk-button';
 import { GtkWindowImpl, GTK_WINDOW_TAG } from '../widgets/gtk-window';
 import { GtkWidgetImpl, GtkWidgetProps } from '../widgets/gtk-widget';
@@ -9,7 +10,6 @@ import {
   GtkStackPageImpl,
   GTK_STACK_PAGE_TAG,
 } from '../widgets/gtk-stack-page';
-import { GtkStackImpl, GTK_STACK_TAG } from '../widgets/gtk-stack';
 
 declare const imports: any;
 
@@ -265,7 +265,7 @@ export const createRoot = ({
 
       app.connect('activate', () => {
         reconciler.updateContainer(element, root, null, function () {
-          let activeWindow = app.activeWindow;
+          let activeWindow: GtkWindowImpl | null = app.activeWindow;
 
           if (!app.$windows) {
             app.$windows = [];

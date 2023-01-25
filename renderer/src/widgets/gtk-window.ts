@@ -1,13 +1,34 @@
-import { createReactComponent } from '../utils/create-react-component';
+import { ReactElement } from 'react';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
+import { createReactComponent } from '../utils/create-react-component';
 
 export const GTK_WINDOW_TAG = 'gtk-window';
 
 export interface GtkWindowProps extends GtkWidgetProps {
   /**
-   * Is this window a modal?
+   * The default height of the window.
+   */
+  defaultHeight?: number;
+
+  /**
+   * The default width of the window.
+   */
+  defaultWidth?: number;
+
+  /**
+   * The title of the window.
+   */
+  title?: string;
+
+  /**
+   * If TRUE, the window is modal.
    */
   modal?: boolean;
+
+  /**
+   * The child widget.
+   */
+  children?: ReactElement | string;
 }
 
 export const GtkWindow = createReactComponent<GtkWindowImpl, GtkWindowProps>(
@@ -26,7 +47,7 @@ export class GtkWindowImpl extends GtkWidgetImpl {
       this.nativeInstance.visible = false;
 
       const activeAppWindows = rootInstance.$windows.filter(
-        (win: { visible: boolean }) => win.visible
+        (win: GtkWindowImpl) => win.visible
       );
 
       if (activeAppWindows.length === 0) {
@@ -36,7 +57,7 @@ export class GtkWindowImpl extends GtkWidgetImpl {
       return true;
     });
 
-    rootInstance.$windows.push(this.nativeInstance);
+    rootInstance.$windows.push(this);
   }
 
   get nativeName() {

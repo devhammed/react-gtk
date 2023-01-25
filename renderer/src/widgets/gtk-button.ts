@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
 import { createReactComponent } from '../utils/create-react-component';
 
@@ -5,6 +6,7 @@ export const GTK_BUTTON_TAG = 'gtk-button';
 
 export interface GtkButtonProps extends GtkWidgetProps {
   label?: string;
+  children?: ReactNode;
   onClicked?: (btn: GtkButtonImpl) => void;
 }
 

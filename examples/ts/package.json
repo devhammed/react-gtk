@@ -1,0 +1,33 @@
+{
+  "name": "react-gtk-ts-example",
+  "version": "1.0.0",
+  "private": true,
+  "description": "React GTK+ TypeScript Example",
+  "source": "src/index.tsx",
+  "scripts": {
+    "build": "parcel build --no-source-maps",
+    "start": "parcel watch --no-source-maps --no-hmr",
+    "app": "gjs dist/index.js",
+    "clean": "rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devhammed/react-gtk.git"
+  },
+  "author": "Hammed Oyedele",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devhammed/react-gtk/issues"
+  },
+  "homepage": "https://github.com/devhammed/react-gtk#readme",
+  "devDependencies": {
+    "parcel": "^2.8.3",
+    "typescript": "^4.9.4",
+    "@parcel/packager-ts": "^2.8.3",
+    "@parcel/transformer-typescript-types": "^2.8.3"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-gtk-renderer": "^1.0.5"
+  }
+}

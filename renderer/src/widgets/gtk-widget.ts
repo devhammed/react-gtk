@@ -34,6 +34,14 @@ export abstract class GtkWidgetImpl {
     return 'Widget';
   }
 
+  get visible(): boolean {
+    return this.nativeInstance.visible;
+  }
+
+  set visible(value: boolean) {
+    this.nativeInstance.visible = value;
+  }
+
   getProp<T>(key: string): T {
     return this.nativeInstance[key] as T;
   }

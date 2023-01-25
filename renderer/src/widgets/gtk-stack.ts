@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
 import { createReactComponent } from '../utils/create-react-component';
 import { GtkStackTransitionType } from '../enums/gtk-stack-transition-type';
@@ -5,7 +6,8 @@ import { GtkStackTransitionType } from '../enums/gtk-stack-transition-type';
 export const GTK_STACK_TAG = 'gtk-stack';
 
 export interface GtkStackProps extends GtkWidgetProps {
-  transitionType: GtkStackTransitionType;
+  transitionType?: GtkStackTransitionType;
+  children?: ReactNode;
 }
 
 export const GtkStack = createReactComponent<GtkStackImpl, GtkStackProps>(
