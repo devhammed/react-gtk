@@ -7,3 +7,4 @@ Icon=application-default-icon
 Terminal=false
 Type=Application
 Keywords=Hello;World;Example;
+StartupWMClass=@PACKAGE_NAME@
