@@ -60,7 +60,7 @@ export function MyApp(props) {
             </GtkButton>
 
             <GtkButton
-              onClicked={() => {
+              onClicked={(btn) => {
                 const stack = stackRef.current;
                 const secondPage = secondPageRef.current;
 

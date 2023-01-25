@@ -26,6 +26,7 @@ export abstract class GtkWidgetImpl {
   constructor(props: GtkWidgetProps, rootInstance: any) {
     this.nativeInstance = new Gtk[this.nativeName]();
     this.nativeInstance.$root = rootInstance;
+    this.nativeInstance.nativeName = this.nativeName;
     this.updateProps(props);
   }
 

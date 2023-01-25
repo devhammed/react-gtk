@@ -1,5 +1,5 @@
-import { createReactComponent } from '../utils/create-react-component';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
+import { createReactComponent } from '../utils/create-react-component';
 import { GtkStackTransitionType } from '../enums/gtk-stack-transition-type';
 
 export const GTK_STACK_TAG = 'gtk-stack';

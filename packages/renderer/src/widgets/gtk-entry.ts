@@ -1,5 +1,5 @@
-import { createReactComponent } from '../utils/create-react-component';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
+import { createReactComponent } from '../utils/create-react-component';
 
 export const GTK_ENTRY_TAG = 'gtk-entry';
 
@@ -20,11 +20,11 @@ export class GtkEntryImpl extends GtkWidgetImpl {
     return 'Entry';
   }
 
-  get text(): string {
+  get text(): string | null {
     return this.nativeInstance.buffer.text;
   }
 
   set text(value: string | null) {
-    this.nativeInstance.buffer.text = value || '';
+    this.nativeInstance.buffer.text = value;
   }
 }

@@ -1,6 +1,6 @@
-import { createReactComponent } from '../utils/create-react-component';
 import { GtkOrientation } from '../enums/gtk-orientation';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
+import { createReactComponent } from '../utils/create-react-component';
 
 export const GTK_BOX_TAG = 'gtk-box';
 

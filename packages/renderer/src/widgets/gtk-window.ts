@@ -3,7 +3,12 @@ import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
 
 export const GTK_WINDOW_TAG = 'gtk-window';
 
-export interface GtkWindowProps extends GtkWidgetProps {}
+export interface GtkWindowProps extends GtkWidgetProps {
+  /**
+   * Is this window a modal?
+   */
+  modal?: boolean;
+}
 
 export const GtkWindow = createReactComponent<GtkWindowImpl, GtkWindowProps>(
   GTK_WINDOW_TAG

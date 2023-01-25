@@ -1,5 +1,5 @@
-import { createReactComponent } from '../utils/create-react-component';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
+import { createReactComponent } from '../utils/create-react-component';
 
 export const GTK_BUTTON_TAG = 'gtk-button';
 
