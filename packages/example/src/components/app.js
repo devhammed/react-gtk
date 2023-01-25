@@ -60,7 +60,6 @@ export function MyApp(props) {
             </GtkButton>
 
             <GtkButton
-              label='Next page'
               onClicked={() => {
                 const stack = stackRef.current;
                 const secondPage = secondPageRef.current;
@@ -68,8 +67,9 @@ export function MyApp(props) {
                 if (stack && secondPage) {
                   stack.set_visible_child(secondPage);
                 }
-              }}
-            />
+              }}>
+              Next page
+            </GtkButton>
           </GtkStackPage>
 
           <GtkStackPage
