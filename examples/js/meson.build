@@ -1,12 +1,12 @@
 project(
-    'com.github.devhammed.reactGTK',
+    'com.github.devhammed.reactGTKJS',
     'c',
     version: '1.0.0'
 )
 
 gnome = import('gnome')
 
-exec_name = 'React GTK'
+exec_name = 'React GTK JavaScript'
 
 app_id = meson.project_name()
 
@@ -29,7 +29,7 @@ source_conf.set('PKGDATADIR', pkgdatadir)
 
 install_data(
     configure_file(
-        input: join_paths('data', 'com.github.devhammed.reactGTK.in'),
+        input: join_paths('data', app_id, '.in'),
         output: app_id,
         configuration: source_conf,
     ),
@@ -48,7 +48,7 @@ install_data(
 
 install_data(
     configure_file(
-        input: join_paths('data', 'com.github.devhammed.reactGTK.desktop.in'),
+        input: join_paths('data', app_id, '.desktop.in'),
         output: app_id + '.desktop',
         configuration: source_conf,
     ),
@@ -57,7 +57,7 @@ install_data(
 
 install_data(
     configure_file(
-        input: join_paths('data', 'com.github.devhammed.reactGTK.appdata.xml.in'),
+        input: join_paths('data', app_id, '.appdata.xml.in'),
         output: app_id + '.appdata.xml',
         configuration: source_conf,
     ),
