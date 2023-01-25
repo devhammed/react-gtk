@@ -1,4 +1,4 @@
-import { createElement, forwardRef } from 'react';
+import { createReactComponent } from '../utils/create-react-component';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
 import { GtkStackTransitionType } from '../enums/gtk-stack-transition-type';
 
@@ -8,8 +8,8 @@ export interface GtkStackProps extends GtkWidgetProps {
   transitionType: GtkStackTransitionType;
 }
 
-export const GtkStack = forwardRef<GtkStackImpl, GtkStackProps>((props, ref) =>
-  createElement(GTK_STACK_TAG, { ref, ...props })
+export const GtkStack = createReactComponent<GtkStackImpl, GtkStackProps>(
+  GTK_STACK_TAG
 );
 
 export class GtkStackImpl extends GtkWidgetImpl {

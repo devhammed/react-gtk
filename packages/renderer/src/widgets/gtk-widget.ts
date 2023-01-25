@@ -1,7 +1,7 @@
-import { createElement, forwardRef } from 'react';
 import { GtkAlign } from '../enums/gtk-align';
 import { isSignal } from '../utils/is-signal';
 import { toKebabCase } from '../utils/to-kebab-case';
+import { createReactComponent } from '../utils/create-react-component';
 
 declare const imports: any;
 
@@ -16,8 +16,8 @@ export interface GtkWidgetProps {
   name?: string;
 }
 
-export const GtkWidget = forwardRef<GtkWidgetImpl, GtkWidgetProps>(
-  (props, ref) => createElement(GTK_WIDGET_TAG, { ref, ...props })
+export const GtkWidget = createReactComponent<GtkWidgetImpl, GtkWidgetProps>(
+  GTK_WIDGET_TAG
 );
 
 export abstract class GtkWidgetImpl {

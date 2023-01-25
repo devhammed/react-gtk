@@ -1,4 +1,4 @@
-import { createElement, forwardRef } from 'react';
+import { createReactComponent } from '../utils/create-react-component';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
 
 export const GTK_BUTTON_TAG = 'gtk-button';
@@ -8,8 +8,8 @@ export interface GtkButtonProps extends GtkWidgetProps {
   onClicked?: (btn: GtkButtonImpl) => void;
 }
 
-export const GtkButton = forwardRef<GtkButtonImpl, GtkButtonProps>(
-  (props, ref) => createElement(GTK_BUTTON_TAG, { ref, ...props })
+export const GtkButton = createReactComponent<GtkButtonImpl, GtkButtonProps>(
+  GTK_BUTTON_TAG
 );
 
 export class GtkButtonImpl extends GtkWidgetImpl {

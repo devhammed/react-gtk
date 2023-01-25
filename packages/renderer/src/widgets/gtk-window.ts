@@ -1,12 +1,12 @@
-import { createElement, forwardRef } from 'react';
+import { createReactComponent } from '../utils/create-react-component';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
 
 export const GTK_WINDOW_TAG = 'gtk-window';
 
 export interface GtkWindowProps extends GtkWidgetProps {}
 
-export const GtkWindow = forwardRef<GtkWindowImpl, GtkWindowProps>(
-  (props, ref) => createElement(GTK_WINDOW_TAG, { ref, ...props })
+export const GtkWindow = createReactComponent<GtkWindowImpl, GtkWindowProps>(
+  GTK_WINDOW_TAG
 );
 
 export class GtkWindowImpl extends GtkWidgetImpl {

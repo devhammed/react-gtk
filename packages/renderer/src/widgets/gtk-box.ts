@@ -1,4 +1,4 @@
-import { createElement, forwardRef } from 'react';
+import { createReactComponent } from '../utils/create-react-component';
 import { GtkOrientation } from '../enums/gtk-orientation';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
 
@@ -9,8 +9,8 @@ export interface GtkBoxProps extends GtkWidgetProps {
   spacing?: number;
 }
 
-export const GtkBox = forwardRef<GtkBoxImpl, GtkBoxProps>((props, ref) =>
-  createElement(GTK_BOX_TAG, { ref, ...props })
+export const GtkBox = createReactComponent<GtkBoxImpl, GtkBoxProps>(
+  GTK_BOX_TAG
 );
 
 export class GtkBoxImpl extends GtkWidgetImpl {

@@ -1,4 +1,4 @@
-import { createElement, forwardRef } from 'react';
+import { createReactComponent } from '../utils/create-react-component';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
 
 export const GTK_ENTRY_TAG = 'gtk-entry';
@@ -7,8 +7,8 @@ export interface GtkEntryProps extends GtkWidgetProps {
   onChanged?: (entry: GtkEntryImpl) => void;
 }
 
-export const GtkEntry = forwardRef<GtkEntryImpl, GtkEntryProps>((props, ref) =>
-  createElement(GTK_ENTRY_TAG, { ref, ...props })
+export const GtkEntry = createReactComponent<GtkEntryImpl, GtkEntryProps>(
+  GTK_ENTRY_TAG
 );
 
 export class GtkEntryImpl extends GtkWidgetImpl {

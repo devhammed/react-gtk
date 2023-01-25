@@ -1,4 +1,4 @@
-import { createElement, forwardRef } from 'react';
+import { createReactComponent } from '../utils/create-react-component';
 import { GtkWidgetImpl, GtkWidgetProps } from './gtk-widget';
 
 export const GTK_LABEL_TAG = 'gtk-label';
@@ -8,8 +8,8 @@ export interface GtkLabelProps extends GtkWidgetProps {
   useMarkup?: boolean;
 }
 
-export const GtkLabel = forwardRef<GtkLabelImpl, GtkLabelProps>((props, ref) =>
-  createElement(GTK_LABEL_TAG, { ref, ...props })
+export const GtkLabel = createReactComponent<GtkLabelImpl, GtkLabelProps>(
+  GTK_LABEL_TAG
 );
 
 export class GtkLabelImpl extends GtkWidgetImpl {
