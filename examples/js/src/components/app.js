@@ -34,7 +34,7 @@ export function MyApp(props) {
             valign={GtkAlign.CENTER}
             halign={GtkAlign.CENTER}
             orientation={GtkOrientation.VERTICAL}>
-            <GtkLabel label='Hello World' />
+            <GtkLabel label='Hello World!!!' />
 
             {hasClickedSixTimes &&
               '<i>Hi World, testing insertBefore and text instance!</i>'}

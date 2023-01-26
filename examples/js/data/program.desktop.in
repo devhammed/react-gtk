@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=@EXEC_NAME@
+Name=@PACKAGE_NAME@
 Comment=Testings
 Categories=Utility;Education;
-Exec=@PACKAGE_NAME@
+Exec=@PACKAGE_ID@
 Icon=application-default-icon
 Terminal=false
 Type=Application
 Keywords=Hello;World;Example;
-StartupWMClass=@PACKAGE_NAME@
+StartupWMClass=@PACKAGE_ID@

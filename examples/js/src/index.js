@@ -2,16 +2,17 @@ import { MyApp } from './components/app';
 import { createRoot } from 'react-gtk-renderer';
 
 imports.package.init({
-  name: '@PACKAGE_NAME@',
+  name: '@PACKAGE_ID@',
   version: '@PACKAGE_VERSION@',
   prefix: '@PREFIX@',
   libdir: '@LIBDIR@',
+  pkgdatadir: '@PKGDATADIR@',
 });
 
 imports.package.run({
   main: function (argv) {
     const root = createRoot({
-      id: '@PACKAGE_NAME@',
+      id: '@PACKAGE_ID@',
     });
 
     root.render(<MyApp />, argv);

@@ -1,5 +1,6 @@
 project(
     'com.github.devhammed.reactGTKJS',
+    'c',
     version: '1.0.0'
 )
 
@@ -7,56 +8,72 @@ gnome = import('gnome')
 
 app_id = meson.project_name()
 
-exec_name = 'React GTK JavaScript'
-
-pkgdatadir = join_paths(get_option('datadir'), app_id)
-
-libdir = join_paths(get_option('prefix'), get_option('libdir'))
-
-exec_dir = join_paths(libdir, app_id)
-
 source_conf = configuration_data()
 
-source_conf.set('GJS', find_program('gjs').path())
-source_conf.set('SH', find_program('sh').path())
-source_conf.set('PACKAGE_NAME', app_id)
+source_conf.set('PACKAGE_ID', app_id)
+
+source_conf.set('PACKAGE_NAME', 'React GTK JavaScript')
+
+source_conf.set('RESOURCES_URI', 'resource:///com/github/devhammed/reactGTKJS')
+
+source_conf.set('JS_MAIN_FILE', join_paths('build', app_id + '.js'))
+
+source_conf.set(
+    'JS_MAIN_URI',
+    join_paths(
+        source_conf.get('RESOURCES_URI'),
+        source_conf.get('JS_MAIN_FILE')
+    )
+)
+
 source_conf.set('PACKAGE_VERSION', meson.project_version())
+
 source_conf.set('PREFIX', get_option('prefix'))
-source_conf.set('LIBDIR', libdir)
-source_conf.set('EXEC_NAME', exec_name)
-source_conf.set('EXEC', join_paths(exec_dir, exec_name))
-source_conf.set('PKGDATADIR', pkgdatadir)
+
+source_conf.set('LIBDIR', join_paths(get_option('prefix'), get_option('libdir')))
+
+source_conf.set('PKGDATADIR', join_paths(get_option('prefix'), get_option('datadir'), app_id))
+
+configure_file(
+    input: join_paths('dist',  'index.js'),
+    output: app_id + '.js',
+    configuration: source_conf,
+)
 
 custom_target(
     'app',
     console: true,
     install: false,
-    output: 'app',
-    command: [find_program('npm').path(), 'run', 'build'],
+    output: 'compile-app',
+    command: [
+        find_program('npm').path(), 'run', 'build', '&&',
+        'meson', '--reconfigure', '&&',
+        'meson', 'compile'
+    ]
 )
 
-install_data(
+executable(
+    app_id,
     configure_file(
-        input: join_paths('data', app_id + '.in'),
-        output: app_id,
+        input: join_paths('data',  'program.c.in'),
+        output: app_id + '.c',
         configuration: source_conf,
     ),
-    install_dir: get_option('bindir'),
-    install_mode: 'rwxr-xr-x'
-)
-
-install_data(
-    configure_file(
-        input: join_paths('dist', 'index.js'),
-        output: exec_name,
-        configuration: source_conf,
+    gnome.compile_resources(
+        app_id + '-resources',
+        configure_file(
+            input: join_paths('data',  'program.gresource.xml.in'),
+            output: app_id + '.gresource.xml',
+            configuration: source_conf,
+        ),
     ),
-    install_dir: exec_dir,
+    install: true,
+    dependencies: [dependency('gjs-1.0')]
 )
 
 install_data(
     configure_file(
-        input: join_paths('data', app_id + '.desktop.in'),
+        input: join_paths('data', 'program.desktop.in'),
         output: app_id + '.desktop',
         configuration: source_conf,
     ),
@@ -65,7 +82,7 @@ install_data(
 
 install_data(
     configure_file(
-        input: join_paths('data', app_id + '.appdata.xml.in'),
+        input: join_paths('data', 'program.appdata.xml.in'),
         output: app_id + '.appdata.xml',
         configuration: source_conf,
     ),
