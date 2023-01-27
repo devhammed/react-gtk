@@ -1,5 +1,5 @@
-import { GtkBoxImpl, GtkBoxProps } from './gtk-box';
-import { createReactComponent } from '../utils/create-react-component';
+import { GtkBoxImpl, GtkBoxProps } from '@/widgets/gtk-box';
+import { createReactComponent } from '@/utils/create-react-component';
 
 export const GTK_STACK_PAGE_TAG = 'gtk-stack-page';
 

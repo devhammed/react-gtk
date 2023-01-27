@@ -8,7 +8,6 @@ import {
   GtkStack,
   GtkStackImpl,
   GtkStackPage,
-  GtkStackPageImpl,
   GtkStackTransitionType,
   GtkWindow,
   GtkWindowImpl,
@@ -16,11 +15,9 @@ import {
 import { useMemo, useRef, useState } from 'react';
 
 export function MyApp() {
-  const stackRef = useRef<GtkStackImpl>();
-  const firstPageRef = useRef<GtkStackPageImpl>();
-  const secondPageRef = useRef<GtkStackPageImpl>();
-  const secondWinRef = useRef<GtkWindowImpl>();
   const [count, setCount] = useState(0);
+  const stackRef = useRef<GtkStackImpl>();
+  const secondWinRef = useRef<GtkWindowImpl>();
   const hasClickedSixTimes = useMemo(() => count === 6, [count]);
 
   return (
@@ -30,7 +27,7 @@ export function MyApp() {
           ref={stackRef}
           transitionType={GtkStackTransitionType.SLIDE_RIGHT}>
           <GtkStackPage
-            ref={firstPageRef}
+            name='firstPage'
             marginStart={25}
             marginEnd={25}
             spacing={25}
@@ -63,20 +60,15 @@ export function MyApp() {
             </GtkButton>
 
             <GtkButton
-              onClicked={(btn) => {
-                const stack = stackRef.current;
-                const secondPage = secondPageRef.current;
-
-                if (stack && secondPage) {
-                  stack.setVisibleChild(secondPage);
-                }
+              onClicked={() => {
+                stackRef.current?.setVisibleChildName('secondPage');
               }}>
               Next page
             </GtkButton>
           </GtkStackPage>
 
           <GtkStackPage
-            ref={secondPageRef}
+            name='secondPage'
             marginStart={25}
             marginEnd={25}
             spacing={25}
@@ -88,12 +80,12 @@ export function MyApp() {
             <GtkButton
               label='Previous page'
               onClicked={() => {
-                const stack = stackRef.current;
-                const firstPage = firstPageRef.current;
+                console.log(
+                  'current stack page name:',
+                  stackRef.current.visibleChildName
+                );
 
-                if (stack && firstPage) {
-                  stack.setVisibleChild(firstPage);
-                }
+                stackRef.current.visibleChildName = 'firstPage';
               }}
             />
           </GtkStackPage>

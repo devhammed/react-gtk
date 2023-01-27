@@ -1,7 +1,8 @@
-import { GtkAlign } from '../enums/gtk-align';
-import { isSignal } from '../utils/is-signal';
-import { toKebabCase } from '../utils/to-kebab-case';
-import { createReactComponent } from '../utils/create-react-component';
+import { GtkAlign } from '@/enums/gtk-align';
+import { isSignal } from '@/utils/is-signal';
+import { toKebabCase } from '@/utils/to-kebab-case';
+import { createReactComponent } from '@/utils/create-react-component';
+import { GtkAccessibleRole } from '@/enums/gtk-accessible-role';
 
 declare const imports: any;
 
@@ -13,10 +14,51 @@ export const GTK_WIDGET_TAG = 'gtk-widget';
  * @group Props
  */
 export interface GtkWidgetProps {
+  /**
+   * The accessible role of the given GtkAccessible implementation.
+   * The accessible role cannot be changed once set.
+   */
+  accessibleRole?: GtkAccessibleRole;
+
+  /**
+   * Whether the widget is visible.
+   */
   visible?: boolean;
+
+  /**
+   * How to distribute horizontal space if widget gets extra space.
+   */
   halign?: GtkAlign;
+
+  /**
+   * How to distribute vertical space if widget gets extra space.
+   */
   valign?: GtkAlign;
+
+  /**
+   * The name of the widget.
+   */
   name?: string;
+
+  /**
+   * Margin on start of widget, horizontally.
+   */
+  marginStart?: number;
+
+  /**
+   * Margin on end of widget, horizontally.
+   */
+  marginEnd?: number;
+
+  /**
+   * Margin on top side of widget.
+   */
+  marginTop?: number;
+
+  /**
+   * Margin on bottom side of widget.
+   */
+  marginBottom?: number;
 }
 
 /**
@@ -30,6 +72,11 @@ export const GtkWidget = createReactComponent<GtkWidgetImpl, GtkWidgetProps>(
  * @group Native Widgets
  */
 export abstract class GtkWidgetImpl {
+  /**
+   * The instance of the GTK widget this implementation is using.
+   *
+   * @see {@link nativeName}
+   */
   public nativeInstance: any;
 
   constructor(props: GtkWidgetProps, rootInstance: any) {
@@ -39,10 +86,16 @@ export abstract class GtkWidgetImpl {
     this.updateProps(props);
   }
 
+  /**
+   * The internal name of the GTK widget.
+   */
   get nativeName(): string {
     return 'Widget';
   }
 
+  /**
+   * Whether the widget is visible.
+   */
   get visible(): boolean {
     return this.nativeInstance.visible;
   }
@@ -51,15 +104,21 @@ export abstract class GtkWidgetImpl {
     this.nativeInstance.visible = value;
   }
 
-  getProp<T>(key: string): T {
-    return this.nativeInstance[key] as T;
+  /**
+   * The name of the widget.
+   */
+  get name(): string | null {
+    return this.nativeInstance.name;
   }
 
-  setProp<T>(key: string, value: T): void {
-    this.nativeInstance[key] = value;
+  set name(value: string | null) {
+    this.nativeInstance.name = value;
   }
 
-  updateProps(props: GtkWidgetProps) {
+  /**
+   * Updates the props of this widget.
+   */
+  updateProps(props: GtkWidgetProps): void {
     // The array of signals to attach...
     const signals: {
       name: string;
@@ -80,7 +139,7 @@ export abstract class GtkWidgetImpl {
           handler: value,
         });
       } else {
-        this.setProp(prop, value);
+        this.nativeInstance[prop] = value;
       }
     }
 
@@ -105,21 +164,33 @@ export abstract class GtkWidgetImpl {
     });
   }
 
-  appendChild(_child: GtkWidgetImpl) {
+  /**
+   * Append a child to this widget.
+   */
+  appendChild(_child: GtkWidgetImpl): void {
     throw new Error(`Cannot add children to a ${this.nativeName}.`);
   }
 
-  insertBefore(_child: GtkWidgetImpl, _beforeChild: GtkWidgetImpl) {
+  /**
+   * Insert [child] before [beforeChild] in this widget.
+   */
+  insertBefore(_child: GtkWidgetImpl, _beforeChild: GtkWidgetImpl): void {
     throw new Error(
       `Cannot insert child before another to a ${this.nativeName}.`
     );
   }
 
-  removeChild(_child: GtkWidgetImpl) {
+  /**
+   * Remove a child from this widget.
+   */
+  removeChild(_child: GtkWidgetImpl): void {
     throw new Error(`Cannot remove children from a ${this.nativeName}.`);
   }
 
-  detach() {
+  /**
+   * Destroy the instance of this widget.
+   */
+  detach(): void {
     try {
       if (typeof this.nativeInstance.unparent === 'function') {
         this.nativeInstance.unparent();

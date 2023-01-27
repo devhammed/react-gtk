@@ -1,15 +1,12 @@
 import * as ReactReconciler from 'react-reconciler';
-import { GtkBoxImpl, GTK_BOX_TAG } from '../widgets/gtk-box';
-import { GtkEntryImpl, GTK_ENTRY_TAG } from '../widgets/gtk-entry';
-import { GtkLabelImpl, GTK_LABEL_TAG } from '../widgets/gtk-label';
-import { GtkStackImpl, GTK_STACK_TAG } from '../widgets/gtk-stack';
-import { GtkButtonImpl, GTK_BUTTON_TAG } from '../widgets/gtk-button';
-import { GtkWindowImpl, GTK_WINDOW_TAG } from '../widgets/gtk-window';
-import { GtkWidgetImpl, GtkWidgetProps } from '../widgets/gtk-widget';
-import {
-  GtkStackPageImpl,
-  GTK_STACK_PAGE_TAG,
-} from '../widgets/gtk-stack-page';
+import { GtkBoxImpl, GTK_BOX_TAG } from '@/widgets/gtk-box';
+import { GtkEntryImpl, GTK_ENTRY_TAG } from '@/widgets/gtk-entry';
+import { GtkLabelImpl, GTK_LABEL_TAG } from '@/widgets/gtk-label';
+import { GtkStackImpl, GTK_STACK_TAG } from '@/widgets/gtk-stack';
+import { GtkButtonImpl, GTK_BUTTON_TAG } from '@/widgets/gtk-button';
+import { GtkWindowImpl, GTK_WINDOW_TAG } from '@/widgets/gtk-window';
+import { GtkWidgetImpl, GtkWidgetProps } from '@/widgets/gtk-widget';
+import { GtkStackPageImpl, GTK_STACK_PAGE_TAG } from '@/widgets/gtk-stack-page';
 
 declare const imports: any;
 

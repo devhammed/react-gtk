@@ -1,5 +1,5 @@
 import { createElement, forwardRef } from 'react';
-import { GtkWidgetImpl, GtkWidgetProps } from '../widgets/gtk-widget';
+import { GtkWidgetImpl, GtkWidgetProps } from '@/widgets/gtk-widget';
 
 /**
  * Create a React component from a widget tag.
