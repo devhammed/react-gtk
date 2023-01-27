@@ -6,17 +6,17 @@ import {
   GtkLabel,
   GtkOrientation,
   GtkStack,
+  GtkStackImpl,
   GtkStackPage,
   GtkStackTransitionType,
   GtkWindow,
+  GtkWindowImpl,
 } from 'react-gtk-renderer';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
-export function MyApp(props) {
-  const stackRef = useRef(null);
-  const firstPageRef = useRef(null);
-  const secondPageRef = useRef(null);
-  const secondWinRef = useRef(null);
+export function MyApp() {
+  const stackRef = useRef();
+  const secondWinRef = useRef();
   const [count, setCount] = useState(0);
   const hasClickedSixTimes = useMemo(() => count === 6, [count]);
 
@@ -27,14 +27,14 @@ export function MyApp(props) {
           ref={stackRef}
           transitionType={GtkStackTransitionType.SLIDE_RIGHT}>
           <GtkStackPage
-            ref={firstPageRef}
+            name='firstPage'
             marginStart={25}
             marginEnd={25}
             spacing={25}
             valign={GtkAlign.CENTER}
             halign={GtkAlign.CENTER}
             orientation={GtkOrientation.VERTICAL}>
-            <GtkLabel label='Hello World!' />
+            <GtkLabel label='Hello World' />
 
             {hasClickedSixTimes &&
               '<i>Hi World, testing insertBefore and text instance!</i>'}
@@ -60,20 +60,15 @@ export function MyApp(props) {
             </GtkButton>
 
             <GtkButton
-              onClicked={(btn) => {
-                const stack = stackRef.current;
-                const secondPage = secondPageRef.current;
-
-                if (stack && secondPage) {
-                  stack.setVisibleChild(secondPage);
-                }
+              onClicked={() => {
+                stackRef.current.visibleChildName = 'secondPage';
               }}>
               Next page
             </GtkButton>
           </GtkStackPage>
 
           <GtkStackPage
-            ref={secondPageRef}
+            name='secondPage'
             marginStart={25}
             marginEnd={25}
             spacing={25}
@@ -85,12 +80,12 @@ export function MyApp(props) {
             <GtkButton
               label='Previous page'
               onClicked={() => {
-                const stack = stackRef.current;
-                const firstPage = firstPageRef.current;
+                console.log(
+                  'current stack page name:',
+                  stackRef.current.visibleChildName
+                );
 
-                if (stack && firstPage) {
-                  stack.setVisibleChild(firstPage);
-                }
+                stackRef.current.visibleChildName = 'firstPage';
               }}
             />
           </GtkStackPage>

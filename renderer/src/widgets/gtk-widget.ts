@@ -1,12 +1,13 @@
 import { GtkAlign } from '@/enums/gtk-align';
 import { isSignal } from '@/utils/is-signal';
+import { GtkOverflow } from '@/enums/gtk-overflow';
 import { toKebabCase } from '@/utils/to-kebab-case';
-import { createReactComponent } from '@/utils/create-react-component';
 import { GtkAccessibleRole } from '@/enums/gtk-accessible-role';
+import { createReactComponent } from '@/utils/create-react-component';
 
 declare const imports: any;
 
-const { Gtk } = ((imports.gi.versions.Gtk = '4.0'), imports.gi);
+const { Gtk, Gdk } = ((imports.gi.versions.Gtk = '4.0'), imports.gi);
 
 export const GTK_WIDGET_TAG = 'gtk-widget';
 
@@ -59,6 +60,151 @@ export interface GtkWidgetProps {
    * Margin on bottom side of widget.
    */
   marginBottom?: number;
+
+  /**
+   * Whether the widget or any of its descendants can accept the input focus.
+   */
+  canFocus?: boolean;
+
+  /**
+   * Whether the widget can receive pointer events.
+   */
+  canTarget?: boolean;
+
+  /**
+   * Whether the widget should grab focus when it is clicked with the mouse.
+   */
+  focusOnClick?: boolean;
+
+  /**
+   * Whether this widget itself will accept the input focus.
+   */
+  focusable?: boolean;
+
+  /**
+   * Whether the widget is the default widget.
+   */
+  hasDefault?: boolean;
+
+  /**
+   * Whether the widget has the input focus.
+   */
+  hasFocus?: boolean;
+
+  /**
+   * Enables or disables the emission of the onQueryTooltip event on widget.
+   */
+  hasTooltip?: boolean;
+
+  /**
+   * Override for height request of the widget.
+   */
+  heightRequest?: number;
+
+  /**
+   * Whether to expand horizontally.
+   */
+  hexpand?: boolean;
+
+  /**
+   * Whether to use the hexpand property.
+   */
+  hexpandSet?: boolean;
+
+  /**
+   * The GtkLayoutManager instance to use to compute the preferred size of the widget, and allocate its children.
+   */
+  layoutManager?: any;
+
+  /**
+   * The requested opacity of the widget.
+   */
+  opacity?: number;
+
+  /**
+   * How content outside the widget’s content area is treated.
+   */
+  overflow?: GtkOverflow;
+
+  /**
+   * Whether the widget will receive the default action when it is focused.
+   */
+  receivesDefault?: boolean;
+
+  /**
+   * Whether the widget responds to input.
+   */
+  sensitive?: boolean;
+
+  /**
+   * Sets the text of tooltip to be the given string, which is marked up with Pango markup.
+   */
+  tooltipMarkup?: string;
+
+  /**
+   * Sets the text of tooltip to be the given string.
+   */
+  tooltipText?: string;
+
+  /**
+   * Whether to expand vertically.
+   */
+  vexpand?: boolean;
+
+  /**
+   * Whether to use the vexpand property.
+   */
+  vexpandSet?: boolean;
+
+  /**
+   * Override for width request of the widget.
+   */
+  widthRequest?: number;
+
+  /**
+   * A list of css classes applied to this widget.
+   */
+  cssClasses?: string[];
+
+  /**
+   * The cursor used by widget.
+   */
+  cursor?:
+    | 'none'
+    | 'default'
+    | 'help'
+    | 'pointer'
+    | 'context-menu'
+    | 'progress'
+    | 'wait'
+    | 'cell'
+    | 'crosshair'
+    | 'text'
+    | 'vertical-text'
+    | 'alias'
+    | 'copy'
+    | 'no-drop'
+    | 'move'
+    | 'not-allowed'
+    | 'grab'
+    | 'grabbing'
+    | 'all-scroll'
+    | 'col-resize'
+    | 'row-resize'
+    | 'n-resize'
+    | 'e-resize'
+    | 's-resize'
+    | 'w-resize'
+    | 'ne-resize'
+    | 'nw-resize'
+    | 'sw-resize'
+    | 'se-resize'
+    | 'ew-resize'
+    | 'ns-resize'
+    | 'nesw-resize'
+    | 'nwse-resize'
+    | 'zoom-in'
+    | 'zoom-out';
 }
 
 /**
@@ -91,6 +237,27 @@ export abstract class GtkWidgetImpl {
    */
   get nativeName(): string {
     return 'Widget';
+  }
+
+  /**
+   * The parent of this widget.
+   */
+  get parent(): GtkWidgetImpl | Object | null {
+    return this.nativeInstance.$impl ?? this.nativeInstance;
+  }
+
+  /**
+   * The GtkRoot widget of the widget tree containing this widget.
+   */
+  get root(): Object | null {
+    return this.nativeInstance.root;
+  }
+
+  /**
+   * The scale factor of the widget.
+   */
+  get scaleFactor(): number {
+    return this.nativeInstance.scaleFactor;
   }
 
   /**
@@ -139,7 +306,13 @@ export abstract class GtkWidgetImpl {
           handler: value,
         });
       } else {
-        this.nativeInstance[prop] = value;
+        this.nativeInstance[prop] = (() => {
+          if (prop === 'cursor' && typeof value === 'string') {
+            return Gdk.Cursor.new_from_name(value, null);
+          }
+
+          return value;
+        })();
       }
     }
 

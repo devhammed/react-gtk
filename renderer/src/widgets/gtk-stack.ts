@@ -16,6 +16,21 @@ export interface GtkStackProps extends GtkWidgetProps {
   transitionType?: GtkStackTransitionType;
 
   /**
+   * The animation duration, in milliseconds.
+   */
+  transitionDuration?: number;
+
+  /**
+   * TRUE if the stack allocates the same width for all children.
+   */
+  hhomogeneous?: boolean;
+
+  /**
+   * TRUE if the stack allocates the same height for all children.
+   */
+  vhomogeneous?: boolean;
+
+  /**
    * Whether or not the size should smoothly change during the transition.
    */
   interpolateSize?: boolean;
@@ -49,57 +64,22 @@ export class GtkStackImpl extends GtkWidgetImpl {
    * The widget currently visible in the stack.
    */
   get visibleChild(): GtkStackPageImpl {
-    return this.getVisibleChild();
+    return this.nativeInstance.visibleChild.$impl;
   }
 
   set visibleChild(child: GtkStackPageImpl) {
-    this.setVisibleChild(child);
+    this.nativeInstance.set_visible_child(child.nativeInstance);
   }
 
   /**
    * The name of the widget currently visible in the stack.
    */
   get visibleChildName(): string | null {
-    return this.getVisibleChildName();
-  }
-
-  set visibleChildName(name: string) {
-    this.setVisibleChildName(name);
-  }
-
-  /**
-   * Gets the currently visible child of stack.
-   */
-  getVisibleChild(): GtkStackPageImpl {
-    return this.nativeInstance.visibleChild.$impl;
-  }
-
-  /**
-   * Returns the name of the currently visible child of stack.
-   */
-  getVisibleChildName(): string | null {
     return this.nativeInstance.visibleChild.$impl.name;
   }
 
-  /**
-   * Makes child the visible child of stack.
-   */
-  setVisibleChild(child: GtkStackPageImpl): void {
-    this.nativeInstance.set_visible_child(child.nativeInstance);
-  }
-
-  /**
-   * Makes the child with the given name visible.
-   */
-  setVisibleChildName(name: string): void {
+  set visibleChildName(name: string) {
     this.nativeInstance.set_visible_child_name(name);
-  }
-
-  /**
-   * Makes the child with the given name visible with transition.
-   */
-  setVisibleChildFull(name: string, transition: GtkStackTransitionType): void {
-    this.nativeInstance.set_visible_child_full(name, transition);
   }
 
   appendChild(child: GtkStackPageImpl): void {

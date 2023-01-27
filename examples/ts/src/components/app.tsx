@@ -61,7 +61,7 @@ export function MyApp() {
 
             <GtkButton
               onClicked={() => {
-                stackRef.current?.setVisibleChildName('secondPage');
+                stackRef.current.visibleChildName = 'secondPage';
               }}>
               Next page
             </GtkButton>

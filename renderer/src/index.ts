@@ -21,6 +21,7 @@ export { GtkStackPage, GtkStackPageImpl } from '@/widgets/gtk-stack-page';
 
 // Enumerations
 export { GtkAlign } from '@/enums/gtk-align';
+export { GtkOverflow } from '@/enums/gtk-overflow';
 export { GtkOrientation } from '@/enums/gtk-orientation';
 export { GtkAccessibleRole } from '@/enums/gtk-accessible-role';
 export { GtkStackTransitionType } from '@/enums/gtk-stack-transition-type';
