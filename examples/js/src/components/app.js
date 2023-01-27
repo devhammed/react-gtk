@@ -6,19 +6,24 @@ import {
   GtkLabel,
   GtkOrientation,
   GtkStack,
-  GtkStackImpl,
   GtkStackPage,
   GtkStackTransitionType,
   GtkWindow,
-  GtkWindowImpl,
 } from 'react-gtk-renderer';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 export function MyApp() {
-  const stackRef = useRef();
-  const secondWinRef = useRef();
   const [count, setCount] = useState(0);
+  const stackRef = useRef();
+  const entryRef = useRef();
+  const secondWinRef = useRef();
   const hasClickedSixTimes = useMemo(() => count === 6, [count]);
+
+  useEffect(() => {
+    entryRef.current.buffer.text = 'Hello World 1';
+    entryRef.current.buffer.delete_text(11, -1);
+    entryRef.current.buffer.insert_text(11, ', Hi World', -1);
+  }, []);
 
   return (
     <>
@@ -40,6 +45,21 @@ export function MyApp() {
               '<i>Hi World, testing insertBefore and text instance!</i>'}
 
             <GtkEntry
+              ref={entryRef}
+              attributes={[
+                {
+                  start: 0,
+                  end: 5,
+                  type: 'foreground',
+                  value: 'red',
+                },
+                {
+                  start: 5,
+                  end: 11,
+                  type: 'weight',
+                  value: 'bold',
+                },
+              ]}
               onChanged={(entry) => {
                 console.log(entry.text);
               }}

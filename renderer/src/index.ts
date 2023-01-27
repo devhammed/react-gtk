@@ -1,5 +1,7 @@
 // Contracts
 export type { GtkTooltip } from '@/contracts/gtk-tooltip';
+export type { PangoAttrItem } from '@/contracts/pango-attr-item';
+export type { GtkEntryBuffer } from '@/contracts/gtk-entry-buffer';
 export type { RootAppConfig } from '@/contracts/root-app-config';
 export type { RootAppInstance } from '@/contracts/root-app-instance';
 
@@ -31,6 +33,9 @@ export { GtkOrientation } from '@/enums/gtk-orientation';
 export { GtkTextDirection } from '@/enums/gtk-text-direction';
 export { GtkDirectionType } from '@/enums/gtk-direction-type';
 export { GtkAccessibleRole } from '@/enums/gtk-accessible-role';
+export { GtkInputHints } from '@/enums/gtk-input-hints';
+export { GtkInputPurpose } from '@/enums/gtk-input-purpose';
+export { GtkEntryIconPosition } from '@/enums/gtk-entry-icon-position';
 export { GtkStackTransitionType } from '@/enums/gtk-stack-transition-type';
 
 // Renderer
