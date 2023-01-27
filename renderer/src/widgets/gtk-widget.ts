@@ -2,6 +2,10 @@ import { GtkAlign } from '@/enums/gtk-align';
 import { isSignal } from '@/utils/is-signal';
 import { GtkOverflow } from '@/enums/gtk-overflow';
 import { toKebabCase } from '@/utils/to-kebab-case';
+import { GtkTooltip } from '@/contracts/gtk-tooltip';
+import { GtkStateFlags } from '@/enums/gtk-state-flags';
+import { GtkDirectionType } from '@/enums/gtk-direction-type';
+import { GtkTextDirection } from '@/enums/gtk-text-direction';
 import { GtkAccessibleRole } from '@/enums/gtk-accessible-role';
 import { createReactComponent } from '@/utils/create-react-component';
 
@@ -205,6 +209,114 @@ export interface GtkWidgetProps {
     | 'nwse-resize'
     | 'zoom-in'
     | 'zoom-out';
+
+  /**
+   * The notify signal is emitted on an object when one of its properties has its value set through g_object_set_property(), g_object_set(), et al.
+   */
+  onNotify?: (self: GtkWidgetImpl, paramSpec: any) => void;
+
+  /**
+   * Signals that all holders of a reference to the widget should release the reference that they hold.
+   */
+  onDestroy?: (self: GtkWidgetImpl) => void;
+
+  /**
+   * Emitted when widget is hidden.
+   */
+  onHide?: (self: GtkWidgetImpl) => void;
+
+  /**
+   * Emitted when widget is shown.
+   */
+  onShow?: (self: GtkWidgetImpl) => void;
+
+  /**
+   * Emitted when widget is going to be mapped.
+   *
+   * A widget is mapped when the widget is visible (which is controlled with GtkWidget:visible) and all its parents up to the toplevel widget are also visible.
+   *
+   * The ::map signal can be used to determine whether a widget will be drawn, for instance it can resume an animation that was stopped during the emission of GtkWidget::unmap.
+   */
+  onMap?: (self: GtkWidgetImpl) => void;
+
+  /**
+   * Emitted when widget is going to be unmapped.
+   *
+   * A widget is unmapped when either it or any of its parents up to the toplevel widget have been set as hidden.
+   *
+   * As ::unmap indicates that a widget will not be shown any longer, it can be used to, for example, stop an animation on the widget.
+   */
+  onUnmap?: (self: GtkWidgetImpl) => void;
+
+  /**
+   * Emitted when widget is associated with a GdkSurface.
+   *
+   * This means that gtk_widget_realize() has been called or the widget has been mapped (that is, it is going to be drawn).
+   */
+  onRealize?: (self: GtkWidgetImpl) => void;
+
+  /**
+   * Emitted when the GdkSurface associated with widget is destroyed.
+   *
+   * This means that gtk_widget_unrealize() has been called or the widget has been unmapped (that is, it is going to be hidden).
+   */
+  onUnrealize?: (self: GtkWidgetImpl) => void;
+
+  /**
+   * Emitted when the text direction of a widget changes.
+   */
+  onDirectionChanged?: (
+    self: GtkWidgetImpl,
+    previousDirection: GtkTextDirection
+  ) => void;
+
+  /**
+   * Emitted if keyboard navigation fails.
+   *
+   * Return TRUE if stopping keyboard navigation is fine, FALSE if the emitting widget should try to handle the keyboard navigation attempt in its parent widget(s).
+   */
+  onKeynavFailed?: (
+    self: GtkWidgetImpl,
+    direction: GtkDirectionType
+  ) => boolean;
+
+  /**
+   * Emitted when the focus is moved.
+   */
+  onMoveFocus?: (self: GtkWidgetImpl, direction: GtkDirectionType) => void;
+
+  /**
+   * Emitted when a widget is activated via a mnemonic.
+   *
+   * The default handler for this signal activates widget if groupCycling is FALSE, or just makes widget grab focus if groupCycling is TRUE.
+   *
+   * Return TRUE to stop other handlers from being invoked for the event. FALSE to propagate the event further.
+   */
+  onMnemonicActivate?: (self: GtkWidgetImpl, groupCycling: boolean) => boolean;
+
+  /**
+   * Emitted when the widgets tooltip is about to be shown.
+   *
+   * This happens when the GtkWidget:has-tooltip property is TRUE and the hover timeout has expired with the cursor hovering “above” widget; or emitted when widget got focus in keyboard mode.
+   *
+   * Using the given coordinates, the signal handler should determine whether a tooltip should be shown for widget. If this is the case TRUE should be returned, FALSE otherwise. Note that if keyboard_mode is TRUE, the values of x and y are undefined and should not be used.
+   *
+   * The signal handler is free to manipulate tooltip with the therefore destined function calls.
+   *
+   * Return TRUE if tooltip should be shown right now, FALSE otherwise.
+   */
+  onQueryTooltip?: (
+    self: GtkWidgetImpl,
+    x: number,
+    y: number,
+    isKeyboardMode: boolean,
+    tooltip: GtkTooltip
+  ) => boolean;
+
+  /**
+   * Emitted when the widget state changes.
+   */
+  onStateFlagsChanged?: (self: GtkWidgetImpl, flags: GtkStateFlags) => void;
 }
 
 /**
@@ -289,7 +401,7 @@ export abstract class GtkWidgetImpl {
     // The array of signals to attach...
     const signals: {
       name: string;
-      handler: (self: any, ...args: any[]) => void | null;
+      handler: (self: any, ...args: any[]) => any | null;
     }[] = [];
 
     // Set properties...
@@ -331,7 +443,13 @@ export abstract class GtkWidgetImpl {
       if (typeof handler === 'function') {
         this.nativeInstance.$signals[name] = this.nativeInstance.connect(
           name,
-          (self: any, ...args: any[]) => handler(self?.$impl ?? self, ...args)
+          (self: any, ...args: any[]) => {
+            if (self?.$impl instanceof GtkWidgetImpl) {
+              self = self.$impl;
+            }
+
+            return handler(self, ...args);
+          }
         );
       }
     });

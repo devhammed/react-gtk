@@ -47,6 +47,7 @@
   "alias": {
     "@/utils/*": "./src/utils/$1",
     "@/enums/*": "./src/enums/$1",
-    "@/widgets/*": "./src/widgets/$1"
+    "@/widgets/*": "./src/widgets/$1",
+    "@/contracts/*": "./src/contracts/$1"
   }
 }

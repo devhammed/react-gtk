@@ -22,7 +22,10 @@ export { GtkStackPage, GtkStackPageImpl } from '@/widgets/gtk-stack-page';
 // Enumerations
 export { GtkAlign } from '@/enums/gtk-align';
 export { GtkOverflow } from '@/enums/gtk-overflow';
+export { GtkStateFlags } from '@/enums/gtk-state-flags';
 export { GtkOrientation } from '@/enums/gtk-orientation';
+export { GtkTextDirection } from '@/enums/gtk-text-direction';
+export { GtkDirectionType } from '@/enums/gtk-direction-type';
 export { GtkAccessibleRole } from '@/enums/gtk-accessible-role';
 export { GtkStackTransitionType } from '@/enums/gtk-stack-transition-type';
 

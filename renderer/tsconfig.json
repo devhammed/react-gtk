@@ -7,7 +7,8 @@
     "paths": {
       "@/utils/*": ["utils/*"],
       "@/enums/*": ["enums/*"],
-      "@/widgets/*": ["widgets/*"]
+      "@/widgets/*": ["widgets/*"],
+      "@/contracts/*": ["contracts/*"]
     }
   }
 }
