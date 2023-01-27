@@ -1,4 +1,6 @@
 import * as ReactReconciler from 'react-reconciler';
+import { RootProps } from '@/contracts/root-props';
+import { RootInstance } from '@/contracts/root-instance';
 import { GtkBoxImpl, GTK_BOX_TAG } from '@/widgets/gtk-box';
 import { GtkEntryImpl, GTK_ENTRY_TAG } from '@/widgets/gtk-entry';
 import { GtkLabelImpl, GTK_LABEL_TAG } from '@/widgets/gtk-label';
@@ -238,15 +240,6 @@ const reconciler = ReactReconciler({
     throw new Error('Function not implemented.');
   },
 });
-
-export interface RootProps {
-  id: string;
-  flags?: number;
-}
-
-export interface RootInstance {
-  render(element: JSX.Element, argv: string[]): void;
-}
 
 export const createRoot = ({
   id,

@@ -49,7 +49,7 @@ export const GtkStack = createReactComponent<GtkStackImpl, GtkStackProps>(
 );
 
 /**
- * @group Native Widgets
+ * @group Native Implementations
  */
 export class GtkStackImpl extends GtkWidgetImpl {
   constructor(props: GtkStackProps, rootInstance: any) {

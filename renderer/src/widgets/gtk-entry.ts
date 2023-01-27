@@ -18,7 +18,7 @@ export const GtkEntry = createReactComponent<GtkEntryImpl, GtkEntryProps>(
 );
 
 /**
- * @group Native Widgets
+ * @group Native Implementations
  */
 export class GtkEntryImpl extends GtkWidgetImpl {
   constructor(props: GtkEntryProps, rootInstance: any) {

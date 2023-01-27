@@ -21,7 +21,7 @@ export const GtkButton = createReactComponent<GtkButtonImpl, GtkButtonProps>(
 );
 
 /**
- * @group Native Widgets
+ * @group Native Implementations
  */
 export class GtkButtonImpl extends GtkWidgetImpl {
   constructor(props: GtkButtonProps, rootInstance: any) {

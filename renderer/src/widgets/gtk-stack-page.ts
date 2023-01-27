@@ -17,7 +17,7 @@ export const GtkStackPage = createReactComponent<
 >(GTK_STACK_PAGE_TAG);
 
 /**
- * @group Native Widgets
+ * @group Native Implementations
  */
 export class GtkStackPageImpl extends GtkBoxImpl {
   constructor(props: GtkStackPageProps, rootInstance: any) {

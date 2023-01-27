@@ -28,7 +28,7 @@ export const GtkLabel = createReactComponent<GtkLabelImpl, GtkLabelProps>(
 );
 
 /**
- * @group Native Widgets
+ * @group Native Implementations
  */
 export class GtkLabelImpl extends GtkWidgetImpl {
   constructor(props: GtkLabelProps, rootInstance: any) {

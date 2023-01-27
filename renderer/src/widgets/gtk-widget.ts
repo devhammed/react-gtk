@@ -251,14 +251,14 @@ export interface GtkWidgetProps {
   /**
    * Emitted when widget is associated with a GdkSurface.
    *
-   * This means that gtk_widget_realize() has been called or the widget has been mapped (that is, it is going to be drawn).
+   * This means that {@link GtkWidgetImpl.realize()} has been called or the widget has been mapped (that is, it is going to be drawn).
    */
   onRealize?: (self: GtkWidgetImpl) => void;
 
   /**
    * Emitted when the GdkSurface associated with widget is destroyed.
    *
-   * This means that gtk_widget_unrealize() has been called or the widget has been unmapped (that is, it is going to be hidden).
+   * This means that {@link GtkWidgetImpl.unrealize()} has been called or the widget has been unmapped (that is, it is going to be hidden).
    */
   onUnrealize?: (self: GtkWidgetImpl) => void;
 
@@ -327,7 +327,7 @@ export const GtkWidget = createReactComponent<GtkWidgetImpl, GtkWidgetProps>(
 );
 
 /**
- * @group Native Widgets
+ * @group Native Implementations
  */
 export abstract class GtkWidgetImpl {
   /**
@@ -356,6 +356,16 @@ export abstract class GtkWidgetImpl {
    */
   get parent(): GtkWidgetImpl | Object | null {
     return this.nativeInstance.$impl ?? this.nativeInstance;
+  }
+
+  set parent(value: GtkWidgetImpl | Object | null) {
+    if (value !== null) {
+      this.nativeInstance.set_parent(
+        value instanceof GtkWidgetImpl ? value.nativeInstance : value
+      );
+    } else {
+      this.nativeInstance.unparent();
+    }
   }
 
   /**
@@ -483,13 +493,29 @@ export abstract class GtkWidgetImpl {
    */
   detach(): void {
     try {
-      if (typeof this.nativeInstance.unparent === 'function') {
-        this.nativeInstance.unparent();
-      }
-
-      if (typeof this.nativeInstance.unrealize === 'function') {
-        this.nativeInstance.unrealize();
-      }
+      this.unparent();
+      this.unrealize();
     } catch (_) {}
+  }
+
+  /**
+   * Creates the GDK resources associated with a widget.
+   */
+  realize(): void {
+    this.nativeInstance.realize();
+  }
+
+  /**
+   * Causes a widget to be unrealized (frees all GDK resources associated with the widget).
+   */
+  unrealize(): void {
+    this.nativeInstance.unrealize();
+  }
+
+  /**
+   * Dissociate widget from its parent.
+   */
+  unparent(): void {
+    this.parent = null;
   }
 }

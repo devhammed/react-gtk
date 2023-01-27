@@ -33,7 +33,7 @@ export const GtkBox = createReactComponent<GtkBoxImpl, GtkBoxProps>(
 );
 
 /**
- * @group Native Widgets
+ * @group Native Implementations
  */
 export class GtkBoxImpl extends GtkWidgetImpl {
   constructor(props: GtkBoxProps, rootInstance: any) {

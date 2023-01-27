@@ -42,7 +42,7 @@ export const GtkWindow = createReactComponent<GtkWindowImpl, GtkWindowProps>(
 );
 
 /**
- * @group Native Widgets
+ * @group Native Implementations
  */
 export class GtkWindowImpl extends GtkWidgetImpl {
   constructor(props: GtkWindowProps, rootInstance: any) {
