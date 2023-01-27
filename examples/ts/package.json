@@ -28,6 +28,6 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-gtk-renderer": "^1.0.5"
+    "react-gtk-renderer": "^1.0.6"
   }
 }
