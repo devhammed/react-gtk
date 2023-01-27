@@ -1,6 +1,6 @@
 /**
  * @group Contracts
  */
-export interface RootInstance {
+export interface RootAppInstance {
   render(element: JSX.Element, argv: string[]): void;
 }

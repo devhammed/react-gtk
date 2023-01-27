@@ -1,7 +1,7 @@
 /**
  * @group Contracts
  */
-export interface RootProps {
+export interface RootAppConfig {
   id: string;
   flags?: number;
 }

@@ -1,14 +1,16 @@
-// Props & Contracts
+// Contracts
+export type { GtkTooltip } from '@/contracts/gtk-tooltip';
+export type { RootAppConfig } from '@/contracts/root-app-config';
+export type { RootAppInstance } from '@/contracts/root-app-instance';
+
+// Props
 export type { GtkBoxProps } from '@/widgets/gtk-box';
-export type { RootProps } from '@/contracts/root-props';
 export type { GtkLabelProps } from '@/widgets/gtk-label';
 export type { GtkEntryProps } from '@/widgets/gtk-entry';
 export type { GtkStackProps } from '@/widgets/gtk-stack';
-export type { GtkTooltip } from '@/contracts/gtk-tooltip';
 export type { GtkWidgetProps } from '@/widgets/gtk-widget';
 export type { GtkWindowProps } from '@/widgets/gtk-window';
 export type { GtkButtonProps } from '@/widgets/gtk-button';
-export type { RootInstance } from '@/contracts/root-instance';
 export type { GtkStackPageProps } from '@/widgets/gtk-stack-page';
 
 // Widgets & Implementations

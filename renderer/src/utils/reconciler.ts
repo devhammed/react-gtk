@@ -1,6 +1,6 @@
 import * as ReactReconciler from 'react-reconciler';
-import { RootProps } from '@/contracts/root-props';
-import { RootInstance } from '@/contracts/root-instance';
+import { RootAppConfig } from '@/contracts/root-app-config';
+import { RootAppInstance } from '@/contracts/root-app-instance';
 import { GtkBoxImpl, GTK_BOX_TAG } from '@/widgets/gtk-box';
 import { GtkEntryImpl, GTK_ENTRY_TAG } from '@/widgets/gtk-entry';
 import { GtkLabelImpl, GTK_LABEL_TAG } from '@/widgets/gtk-label';
@@ -244,7 +244,7 @@ const reconciler = ReactReconciler({
 export const createRoot = ({
   id,
   flags = Gio.ApplicationFlags.FLAGS_NONE,
-}: RootProps): RootInstance => {
+}: RootAppConfig): RootAppInstance => {
   const app = new Gtk.Application({
     application_id: id,
     flags,
