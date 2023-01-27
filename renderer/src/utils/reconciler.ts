@@ -39,7 +39,7 @@ const reconciler = ReactReconciler({
     rootInstance: any,
     _hostContext,
     _instanceHandle
-  ) {
+  ): GtkWidgetImpl {
     const impl = implementations[type];
 
     if (!impl) {
@@ -49,7 +49,12 @@ const reconciler = ReactReconciler({
     return new impl(props, rootInstance);
   },
 
-  createTextInstance(text, rootInstance, _hostContext, _instanceHandle) {
+  createTextInstance(
+    text,
+    rootInstance,
+    _hostContext,
+    _instanceHandle
+  ): GtkLabelImpl {
     return new GtkLabelImpl({ label: text, useMarkup: true }, rootInstance);
   },
 
@@ -60,7 +65,7 @@ const reconciler = ReactReconciler({
     _prevProps,
     _nextProps,
     _internalHandle
-  ) {
+  ): void {
     instance.updateProps(updatePayload);
   },
 
@@ -68,29 +73,31 @@ const reconciler = ReactReconciler({
     textInstance: GtkLabelImpl,
     oldText: string,
     newText: string
-  ) {
+  ): void {
     if (newText !== oldText) {
       textInstance.label = newText;
     }
   },
 
-  getPublicInstance(instance: GtkWidgetImpl) {
+  getPublicInstance(instance: GtkWidgetImpl): GtkWidgetImpl {
     return instance;
   },
 
-  getRootHostContext(_rootInstance) {
+  getRootHostContext(_rootInstance): null {
     return null;
   },
 
-  getChildHostContext(_parentHostContext, _type) {
+  getChildHostContext(_parentHostContext, _type): null {
     return null;
   },
 
-  shouldSetTextContent() {
+  shouldSetTextContent(): boolean {
     return false;
   },
 
-  resetTextContent(_instance) {},
+  resetTextContent(_instance): null {
+    return null;
+  },
 
   prepareUpdate(
     _instance,
@@ -98,7 +105,7 @@ const reconciler = ReactReconciler({
     oldProps: GtkWidgetProps,
     newProps: GtkWidgetProps,
     _rootInstance
-  ) {
+  ): GtkWidgetProps | null {
     const finalProps = {};
     const mergedProps = { ...oldProps, ...newProps };
 
@@ -125,19 +132,19 @@ const reconciler = ReactReconciler({
     return Object.keys(finalProps).length > 0 ? finalProps : null;
   },
 
-  prepareForCommit() {
+  prepareForCommit(): null {
     return null;
   },
 
-  clearContainer() {
+  clearContainer(): null {
     return null;
   },
 
-  resetAfterCommit() {
+  resetAfterCommit(): null {
     return null;
   },
 
-  appendInitialChild(parentInstance: any, child: unknown) {
+  appendInitialChild(parentInstance: any, child: unknown): void {
     if (parentInstance instanceof Gtk.Application) {
       return;
     }
@@ -145,7 +152,7 @@ const reconciler = ReactReconciler({
     (parentInstance as GtkWidgetImpl).appendChild(child as GtkWidgetImpl);
   },
 
-  appendChildToContainer(parentInstance: any, child: unknown) {
+  appendChildToContainer(parentInstance: any, child: unknown): void {
     if (parentInstance instanceof Gtk.Application) {
       return;
     }
@@ -153,11 +160,11 @@ const reconciler = ReactReconciler({
     (parentInstance as GtkWidgetImpl).appendChild(child as GtkWidgetImpl);
   },
 
-  finalizeInitialChildren(_instance, _type, _props, _rootInstance) {
+  finalizeInitialChildren(_instance, _type, _props, _rootInstance): boolean {
     return false;
   },
 
-  removeChild(parentInstance: any, child: GtkWidgetImpl) {
+  removeChild(parentInstance: any, child: GtkWidgetImpl): void {
     if (parentInstance instanceof Gtk.Application) {
       return;
     }
@@ -165,7 +172,7 @@ const reconciler = ReactReconciler({
     (parentInstance as GtkWidgetImpl).removeChild(child);
   },
 
-  removeChildFromContainer(parentInstance, child: GtkWidgetImpl) {
+  removeChildFromContainer(parentInstance, child: GtkWidgetImpl): void {
     if (parentInstance instanceof Gtk.Application) {
       return;
     }
@@ -173,7 +180,11 @@ const reconciler = ReactReconciler({
     (parentInstance as GtkWidgetImpl).removeChild(child);
   },
 
-  insertBefore(parentInstance: unknown, child: unknown, beforeChild: unknown) {
+  insertBefore(
+    parentInstance: unknown,
+    child: unknown,
+    beforeChild: unknown
+  ): void {
     if (parentInstance instanceof Gtk.Application) {
       return;
     }
@@ -184,46 +195,46 @@ const reconciler = ReactReconciler({
     );
   },
 
-  detachDeletedInstance(instance: unknown) {
+  detachDeletedInstance(instance: unknown): void {
     (instance as GtkWidgetImpl).detach();
   },
 
-  preparePortalMount(_containerInfo: unknown) {
+  preparePortalMount(_containerInfo: unknown): void {
     throw new Error('Function not implemented.');
   },
 
   scheduleTimeout(
     fn: (...args: unknown[]) => unknown,
     delay?: number | undefined
-  ) {
+  ): number {
     return setTimeout(fn, delay);
   },
 
-  cancelTimeout(id: number) {
+  cancelTimeout(id: number): void {
     clearTimeout(id);
   },
 
-  getCurrentEventPriority() {
+  getCurrentEventPriority(): number {
     throw new Error('Function not implemented.');
   },
 
-  getInstanceFromNode(_node: any) {
+  getInstanceFromNode(_node: any): ReactReconciler.Fiber {
     throw new Error('Function not implemented.');
   },
 
-  beforeActiveInstanceBlur() {
+  beforeActiveInstanceBlur(): void {
     throw new Error('Function not implemented.');
   },
 
-  afterActiveInstanceBlur() {
+  afterActiveInstanceBlur(): void {
     throw new Error('Function not implemented.');
   },
 
-  prepareScopeUpdate(_scopeInstance: any, _instance: any) {
+  prepareScopeUpdate(_scopeInstance: any, _instance: any): void {
     throw new Error('Function not implemented.');
   },
 
-  getInstanceFromScope(_scopeInstance: unknown) {
+  getInstanceFromScope(_scopeInstance: unknown): GtkWidgetImpl {
     throw new Error('Function not implemented.');
   },
 });
