@@ -15,6 +15,11 @@ export interface GtkBoxProps extends GtkWidgetProps {
   orientation?: GtkOrientation;
 
   /**
+   * Whether the children should all be the same size.
+   */
+  homogeneous?: boolean;
+
+  /**
    * The amount of space between children.
    */
   spacing?: number;
