@@ -6,6 +6,7 @@ export type { GtkLabelProps } from '@/widgets/gtk-label';
 export type { GtkButtonProps } from '@/widgets/gtk-button';
 export type { GtkEntryProps } from '@/widgets/gtk-entry';
 export type { GtkStackProps } from '@/widgets/gtk-stack';
+export type { GtkTooltip } from '@/contracts/gtk-tooltip';
 export type { GtkStackPageProps } from '@/widgets/gtk-stack-page';
 export type { RootInstance, RootProps } from '@/utils/reconciler';
 
