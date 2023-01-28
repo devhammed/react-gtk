@@ -73,23 +73,32 @@ export class GtkWindowImpl extends GtkWidgetImpl {
     return 'Window';
   }
 
-  appendChild(child: GtkWidgetImpl): void {
-    this.nativeInstance.child = child.nativeInstance;
-  }
-
-  insertBefore(child: GtkWidgetImpl, _beforeChild: GtkWidgetImpl): void {
-    this.nativeInstance.child = child.nativeInstance;
-  }
-
-  removeChild(_child: GtkWidgetImpl): void {
-    this.nativeInstance.child = null;
-  }
-
   present(): void {
     this.nativeInstance.present();
   }
 
   close(): void {
     this.nativeInstance.close();
+  }
+
+  /**
+   * @internal
+   */
+  appendChild(child: GtkWidgetImpl): void {
+    this.nativeInstance.child = child.nativeInstance;
+  }
+
+  /**
+   * @internal
+   */
+  insertBefore(child: GtkWidgetImpl, _beforeChild: GtkWidgetImpl): void {
+    this.nativeInstance.child = child.nativeInstance;
+  }
+
+  /**
+   * @internal
+   */
+  removeChild(_child: GtkWidgetImpl): void {
+    this.nativeInstance.child = null;
   }
 }

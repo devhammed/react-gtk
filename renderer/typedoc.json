@@ -1,5 +1,15 @@
 {
   "$schema": "https://typedoc.org/schema.json",
   "entryPoints": ["./src/index.ts"],
-  "out": "../docs"
+  "out": "../docs",
+  "externalSymbolLinkMappings": {
+    "global": {
+      "GdkRectangle": "https://docs.gtk.org/gdk4/struct.Rectangle.html",
+      "PangoLanguage": "https://docs.gtk.org/Pango/struct.Language.html",
+      "PangoFontDescription": "https://docs.gtk.org/Pango/struct.FontDescription.html",
+      "PangoColor": "https://docs.gtk.org/Pango/struct.Color.html",
+      "pango_color_to_string": "https://docs.gtk.org/Pango/method.Color.to_string.html",
+      "pango_font_description_to_string": "https://docs.gtk.org/Pango/method.FontDescription.to_string.html"
+    }
+  }
 }

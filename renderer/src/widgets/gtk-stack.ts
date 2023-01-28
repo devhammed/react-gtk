@@ -82,6 +82,9 @@ export class GtkStackImpl extends GtkWidgetImpl {
     this.nativeInstance.set_visible_child_name(name);
   }
 
+  /**
+   * @internal
+   */
   appendChild(child: GtkStackPageImpl): void {
     if (child.name !== null) {
       this.nativeInstance.add_named(child.nativeInstance, child.name);
@@ -90,6 +93,9 @@ export class GtkStackImpl extends GtkWidgetImpl {
     }
   }
 
+  /**
+   * @internal
+   */
   removeChild(child: GtkWidgetImpl): void {
     this.nativeInstance.remove(child.nativeInstance);
   }

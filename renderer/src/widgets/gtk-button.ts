@@ -73,10 +73,16 @@ export class GtkButtonImpl extends GtkWidgetImpl {
     return 'Button';
   }
 
+  /**
+   * @internal
+   */
   appendChild(child: GtkWidgetImpl): void {
     this.nativeInstance.child = child.nativeInstance;
   }
 
+  /**
+   * @internal
+   */
   removeChild(_child: GtkWidgetImpl): void {
     this.nativeInstance.child = null;
   }

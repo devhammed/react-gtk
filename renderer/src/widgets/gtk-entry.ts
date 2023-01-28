@@ -157,6 +157,9 @@ export class GtkEntryImpl extends GtkWidgetImpl {
     this.buffer.text = value;
   }
 
+  /**
+   * @internal
+   */
   updateProps(props: GtkEntryProps): void {
     if (props.attributes !== null && props.attributes instanceof Array) {
       const serializedAttrs = props.attributes

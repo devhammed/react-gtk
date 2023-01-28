@@ -1,3 +1,6 @@
+/**
+ * @group Contracts
+ */
 export interface GtkEntryBuffer {
   /**
    * The contents of the buffer.

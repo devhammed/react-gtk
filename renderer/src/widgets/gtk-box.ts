@@ -49,14 +49,23 @@ export class GtkBoxImpl extends GtkWidgetImpl {
     return 'Box';
   }
 
+  /**
+   * @internal
+   */
   appendChild(child: GtkWidgetImpl): void {
     this.nativeInstance.append(child.nativeInstance);
   }
 
+  /**
+   * @internal
+   */
   removeChild(child: GtkWidgetImpl): void {
     this.nativeInstance.remove(child.nativeInstance);
   }
 
+  /**
+   * @internal
+   */
   insertBefore(child: GtkWidgetImpl, beforeChild: GtkWidgetImpl): void {
     const childNativeInstance = child.nativeInstance;
     const beforeChildNativeInstance = beforeChild.nativeInstance;

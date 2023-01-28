@@ -251,14 +251,14 @@ export interface GtkWidgetProps {
   /**
    * Emitted when widget is associated with a GdkSurface.
    *
-   * This means that {@link GtkWidgetImpl.realize()} has been called or the widget has been mapped (that is, it is going to be drawn).
+   * This means that {@link GtkWidgetImpl.realize} has been called or the widget has been mapped (that is, it is going to be drawn).
    */
   onRealize?: (self: GtkWidgetImpl) => void;
 
   /**
    * Emitted when the GdkSurface associated with widget is destroyed.
    *
-   * This means that {@link GtkWidgetImpl.unrealize()} has been called or the widget has been unmapped (that is, it is going to be hidden).
+   * This means that {@link GtkWidgetImpl.unrealize} has been called or the widget has been unmapped (that is, it is going to be hidden).
    */
   onUnrealize?: (self: GtkWidgetImpl) => void;
 
@@ -406,6 +406,8 @@ export abstract class GtkWidgetImpl {
 
   /**
    * Updates the props of this widget.
+   *
+   * @internal
    */
   updateProps(props: GtkWidgetProps): void {
     // The array of signals to attach...
@@ -467,6 +469,8 @@ export abstract class GtkWidgetImpl {
 
   /**
    * Append a child to this widget.
+   *
+   * @internal
    */
   appendChild(_child: GtkWidgetImpl): void {
     throw new Error(`Cannot add children to a ${this.nativeName}.`);
@@ -474,6 +478,8 @@ export abstract class GtkWidgetImpl {
 
   /**
    * Insert [child] before [beforeChild] in this widget.
+   *
+   * @internal
    */
   insertBefore(_child: GtkWidgetImpl, _beforeChild: GtkWidgetImpl): void {
     throw new Error(
@@ -483,6 +489,8 @@ export abstract class GtkWidgetImpl {
 
   /**
    * Remove a child from this widget.
+   *
+   * @internal
    */
   removeChild(_child: GtkWidgetImpl): void {
     throw new Error(`Cannot remove children from a ${this.nativeName}.`);
