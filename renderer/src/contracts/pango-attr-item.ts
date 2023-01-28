@@ -23,9 +23,9 @@ export interface PangoAttrItem {
    * - integers and floats as numbers
    * - strings as string, optionally quoted
    * - font features as quoted string
-   * - {@link !PangoLanguage} as string
-   * - {@link !PangoFontDescription} as serialized by {@link !pango_font_description_to_string}, quoted
-   * - {@link !PangoColor} as serialized by {@link !pango_color_to_string}
+   * - {@link Pango!Language} as string
+   * - {@link Pango!FontDescription} as serialized by {@link Pango!font_description_to_string}, quoted
+   * - {@link Pango!Color} as serialized by {@link Pango!color_to_string}
    */
   value: string;
 }

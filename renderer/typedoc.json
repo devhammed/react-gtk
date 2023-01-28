@@ -3,13 +3,15 @@
   "entryPoints": ["./src/index.ts"],
   "out": "../docs",
   "externalSymbolLinkMappings": {
-    "global": {
-      "GdkRectangle": "https://docs.gtk.org/gdk4/struct.Rectangle.html",
-      "PangoLanguage": "https://docs.gtk.org/Pango/struct.Language.html",
-      "PangoFontDescription": "https://docs.gtk.org/Pango/struct.FontDescription.html",
-      "PangoColor": "https://docs.gtk.org/Pango/struct.Color.html",
-      "pango_color_to_string": "https://docs.gtk.org/Pango/method.Color.to_string.html",
-      "pango_font_description_to_string": "https://docs.gtk.org/Pango/method.FontDescription.to_string.html"
+    "Gdk": {
+      "Rectangle": "https://docs.gtk.org/gdk4/struct.Rectangle.html"
+    },
+    "Pango": {
+      "Language": "https://docs.gtk.org/Pango/struct.Language.html",
+      "FontDescription": "https://docs.gtk.org/Pango/struct.FontDescription.html",
+      "Color": "https://docs.gtk.org/Pango/struct.Color.html",
+      "color_to_string": "https://docs.gtk.org/Pango/method.Color.to_string.html",
+      "font_description_to_string": "https://docs.gtk.org/Pango/method.FontDescription.to_string.html"
     }
   }
 }

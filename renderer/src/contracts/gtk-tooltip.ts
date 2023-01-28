@@ -32,7 +32,7 @@ export interface GtkTooltip {
   set_text(text: string): void;
 
   /**
-   * Sets the {@link !GdkRectangle} area of the widget, where the contents of this tooltip apply, to be rect (in widget coordinates). This is especially useful for properly setting tooltips on GtkTreeView rows and cells, GtkIconViews, etc.
+   * Sets the {@link Gdk!Rectangle} area of the widget, where the contents of this tooltip apply, to be rect (in widget coordinates). This is especially useful for properly setting tooltips on GtkTreeView rows and cells, GtkIconViews, etc.
    */
   set_tip_area(rect: any): void;
 }
