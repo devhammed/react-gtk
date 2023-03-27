@@ -2,7 +2,7 @@ import { GtkAlign } from '@/enums/gtk-align';
 import { isSignal } from '@/utils/is-signal';
 import { GtkOverflow } from '@/enums/gtk-overflow';
 import { toKebabCase } from '@/utils/to-kebab-case';
-import { GtkTooltip } from '@/contracts/gtk-tooltip';
+import { GtkTooltip } from '../contracts/gtk-tooltip';
 import { GtkStateFlags } from '@/enums/gtk-state-flags';
 import { GtkDirectionType } from '@/enums/gtk-direction-type';
 import { GtkTextDirection } from '@/enums/gtk-text-direction';

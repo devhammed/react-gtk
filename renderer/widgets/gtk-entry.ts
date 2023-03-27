@@ -1,7 +1,7 @@
 import { GtkInputHints } from '@/enums/gtk-input-hints';
-import { PangoAttrItem } from '@/contracts/pango-attr-item';
+import { PangoAttrItem } from '../contracts/pango-attr-item';
 import { GtkInputPurpose } from '@/enums/gtk-input-purpose';
-import { GtkEntryBuffer } from '@/contracts/gtk-entry-buffer';
+import { GtkEntryBuffer } from '../contracts/gtk-entry-buffer';
 import { GtkWidgetImpl, GtkWidgetProps } from '@/widgets/gtk-widget';
 import { createReactComponent } from '@/utils/create-react-component';
 import { GtkEntryIconPosition } from '@/enums/gtk-entry-icon-position';

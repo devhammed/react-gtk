@@ -4,7 +4,7 @@
     "moduleResolution": "node",
     "target": "ES2015",
     "lib": ["ES2015", "DOM"],
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
       "@/utils/*": ["utils/*"],
       "@/enums/*": ["enums/*"],

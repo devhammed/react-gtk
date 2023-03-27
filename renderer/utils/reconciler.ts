@@ -1,6 +1,6 @@
 import * as ReactReconciler from 'react-reconciler';
-import { RootAppConfig } from '@/contracts/root-app-config';
-import { RootAppInstance } from '@/contracts/root-app-instance';
+import { RootAppConfig } from '../contracts/root-app-config';
+import { RootAppInstance } from '../contracts/root-app-instance';
 import { GtkBoxImpl, GTK_BOX_TAG } from '@/widgets/gtk-box';
 import { GtkEntryImpl, GTK_ENTRY_TAG } from '@/widgets/gtk-entry';
 import { GtkLabelImpl, GTK_LABEL_TAG } from '@/widgets/gtk-label';

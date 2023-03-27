@@ -2,7 +2,7 @@
   "name": "react-gtk-renderer",
   "version": "1.0.6",
   "description": "React GTK+ Renderer",
-  "source": "src/index.ts",
+  "source": "./index.ts",
   "main": "dist/index.js",
   "types": "dist/types.d.ts",
   "files": [
@@ -45,9 +45,9 @@
     "react-reconciler": "^0.29.0"
   },
   "alias": {
-    "@/utils/*": "./src/utils/$1",
-    "@/enums/*": "./src/enums/$1",
-    "@/widgets/*": "./src/widgets/$1",
-    "@/contracts/*": "./src/contracts/$1"
+    "@/utils/*": "./utils/$1",
+    "@/enums/*": "./enums/$1",
+    "@/widgets/*": "./widgets/$1",
+    "@/contracts/*": "./contracts/$1"
   }
 }
