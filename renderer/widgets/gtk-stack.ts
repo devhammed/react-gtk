@@ -36,7 +36,7 @@ export interface GtkStackProps extends GtkWidgetProps {
   interpolateSize?: boolean;
 
   /**
-   * The stack pages.
+   * The children of the stack.
    */
   children?: ReactNode;
 }
