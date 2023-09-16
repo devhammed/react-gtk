@@ -72,12 +72,12 @@ export class GtkBoxImpl extends GtkWidgetImpl {
 
     this.nativeInstance.insert_child_after(
       childNativeInstance,
-      beforeChildNativeInstance
+      beforeChildNativeInstance,
     );
 
     this.nativeInstance.reorder_child_after(
       beforeChildNativeInstance,
-      childNativeInstance
+      childNativeInstance,
     );
   }
 }
